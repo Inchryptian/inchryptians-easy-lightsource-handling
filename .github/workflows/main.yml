@@ -63,7 +63,7 @@ jobs:
           draft: false
           prerelease: false
           token: ${{ secrets.GITHUB_TOKEN }}
-          artifacts: './src/module.json,./package/module.zip'
+          artifacts: './module.json,./module.zip'
           tag: ${{ env.RELEASE_VERSION }}
 
 
