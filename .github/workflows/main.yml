@@ -16,7 +16,7 @@ jobs:
         run: zip -r ./module.zip ./*
 
       - name: Get Version
-        shell: bsh
+        shell: bash
         id: get-version
         run: echo "::set-output name=version::$(node ./.github/workflows/get-version.js)"
 
