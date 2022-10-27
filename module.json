@@ -8,6 +8,9 @@
       }
       ],
     "version": "1.0.0",
+    "scripts": [
+        "scripts/hello-world.js"
+    ],
     "compatibility": {
       "minimum": "9",
       "verified": "9"
