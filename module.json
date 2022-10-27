@@ -1,18 +1,15 @@
 {
-    "id": "inchryptians-easy-lightsource-handling",
+    "name": "inchryptians-easy-lightsource-handling",
     "title": "Inchryptians easy lightsource handling",
     "description": "A simple module created to handle lightsources more easy",
+    "author": "Inchryptian",
     "version": "1.0.0",
-    "includes": [
-        "scripts/**"
-    ],
-    "styles": [],
-    "packs": [],
     "minimumCoreVersion": "0.7.10",
     "compatibleCoreVersion": "0.8.9",
+    "scripts": [
+        "scripts/**"
+    ],
     "url": "https://github.com/Inchryptian/inchryptians-easy-lightsource-handling/",
     "manifest": "https://github.com/Inchryptian/inchryptians-easy-lightsource-handling/releases/download/Test/module.zip",
     "download": "https://github.com/Inchryptian/inchryptians-easy-lightsource-handling/releases/download/Test/module.json",
-    "allowBugReporter": true,
-    "dependencies": []
 }
