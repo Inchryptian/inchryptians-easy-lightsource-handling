@@ -44,7 +44,7 @@ jobs:
         run: |
           set -euo pipefail
           npm run-script build
-          npm run-script package
+      # npm run-script package
       # Generate changelog for release body
       - name: Generate Changelog
         uses: scottbrenner/generate-changelog-action@f17b985298496cf8df35aa1104091c51e7bfea95
