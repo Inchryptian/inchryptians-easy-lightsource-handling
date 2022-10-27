@@ -11,7 +11,7 @@
     "minimumCoreVersion": "0.7.10",
     "compatibleCoreVersion": "0.8.9",
     "url": "https://github.com/Inchryptian/inchryptians-easy-lightsource-handling/",
-    "manifest": "https://github.com/Inchryptian/inchryptians-easy-lightsource-handling/releases/download/Test/inchryptians-easy-lightsource-handling.zip",
+    "manifest": "https://github.com/Inchryptian/inchryptians-easy-lightsource-handling/releases/download/Test/module.zip",
     "download": "https://github.com/Inchryptian/inchryptians-easy-lightsource-handling/releases/download/Test/module.json",
     "allowBugReporter": true,
     "dependencies": []
