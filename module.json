@@ -11,8 +11,8 @@
     "scripts": [
         "scripts/hello-world.js"
     ],
-    "compatibility": {
-        "minimum": "9",
-        "verified": "9"
-    }
+    "minimumCoreVersion": "0.7.10",
+    "compatibleCoreVersion": "0.8.9",
+    "manifest": "https://github.com/Inchryptian/inchryptians-easy-lightsource-handling/releases/download/Test/inchryptians-easy-lightsource-handling.zip",
+    "download": "https://github.com/Inchryptian/inchryptians-easy-lightsource-handling/releases/download/Test/module.json"
 }
