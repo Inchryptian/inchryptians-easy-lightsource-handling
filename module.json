@@ -8,13 +8,26 @@
         "verified": "9"
     },
     "scripts": [
-        "scripts/hello-world.js"
+        "scripts/testing.js",
+        "scripts/light-sources-handler.js",
+        "scripts/lib.js",
+        "scripts/module.js"        
     ],
+    "styles": [
+        "styles/inchryptians-easy-lightsource-handling.css"
+      ],
     "authors": [
         {
             "name": "Inchryptian"
         }
     ],
+    "languages":[
+        {
+            "lang": "de",
+            "name": "Deutsch",
+            "path": "languages/de.json"
+        }
+    ], 
     "url": "https://github.com/Inchryptian/inchryptians-easy-lightsource-handling/",
     "manifest": "https://raw.githubusercontent.com/Inchryptian/inchryptians-easy-lightsource-handling/main/module.json",
     "download": "https://codeload.github.com/Inchryptian/inchryptians-easy-lightsource-handling/zip/main"
