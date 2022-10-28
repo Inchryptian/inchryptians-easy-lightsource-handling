@@ -1,5 +1,5 @@
 import { createLightButton } from "./lib.js"
-import { startInchryptianScript } from "./light-sources-handler.js"
+import { LightSourcesHandler } from "./light-sources-handler.js"
 
 Hooks.on('renderTokenHUD', (hud, html, title) => {
     const lightButton = createLightButton();

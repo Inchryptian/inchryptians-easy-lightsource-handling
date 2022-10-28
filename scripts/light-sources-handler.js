@@ -1,4 +1,4 @@
-class LightSourcesHandler {
+export class LightSourcesHandler {
 
     static SNOW_CUSTOM = true // Für Snow immer true
 
