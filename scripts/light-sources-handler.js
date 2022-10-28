@@ -162,8 +162,10 @@ export class LightSourcesHandler {
         }
     }
 
-    static LIGHT_INFO_ORDER = [BULLSEYE_INFOS, LAMP_INFOS, HOODED_LANTERN_OPEN_INFOS,
-        LIGHT_SPELL_INFOS, TORCH_INFOS, CANDLE_INFOS, HOODED_LANTERN_CLOSED_INFOS]
+    static LIGHT_INFO_ORDER = [LightSourcesHandler.BULLSEYE_INFOS, LightSourcesHandler.LAMP_INFOS,
+        LightSourcesHandler.HOODED_LANTERN_OPEN_INFOS, LightSourcesHandler.LIGHT_SPELL_INFOS, 
+        LightSourcesHandler.TORCH_INFOS, LightSourcesHandler.CANDLE_INFOS, 
+        LightSourcesHandler.HOODED_LANTERN_CLOSED_INFOS]
 
     constructor() {
 
@@ -175,12 +177,12 @@ export class LightSourcesHandler {
 
     lightLightSource(token, lightInfos) {
         let lightSources = token.actor.items.find(item => item.name == lightInfos.itemName)
-        if (lightSources == undefined) return NO_LIGHT_SOURCES
-        if (lightSources.data.data.quantity < 1) return NO_LIGHT_SOURCES
+        if (lightSources == undefined) return LightSourcesHandler.NO_LIGHT_SOURCES
+        if (lightSources.data.data.quantity < 1) return LightSourcesHandler.NO_LIGHT_SOURCES
         if (lightInfos.fuel == undefined) return
         let fuelItem = token.actor.items.find(e => e.name == lightInfos.fuel)
-        if (fuelItem == undefined) return NO_LIGHT_SOURCES
-        if (fuelItem.data.data.quantity < 1) return NO_LIGHT_SOURCES
+        if (fuelItem == undefined) return LightSourcesHandler.NO_LIGHT_SOURCES
+        if (fuelItem.data.data.quantity < 1) return LightSourcesHandler.NO_LIGHT_SOURCES
     }
 
     dropLightItem(token, lightInfos) {
@@ -360,9 +362,9 @@ export class LightSourcesHandler {
     startInchryptianScript(token) {
         let mainMenuButtons = {}
 
-        for (infos of LIGHT_INFO_ORDER.filter(info => info != LIGHT_SPELL_INFOS)) { mainMenuButtons = addItemButtonsToMenu(mainMenuButtons, token, infos) }
+        for (infos of LightSourcesHandler.LIGHT_INFO_ORDER.filter(info => info != LightSourcesHandler.LIGHT_SPELL_INFOS)) { mainMenuButtons = addItemButtonsToMenu(mainMenuButtons, token, infos) }
 
-        mainMenuButtons = addSpellButtonToMenu(mainMenuButtons, token, LIGHT_SPELL_INFOS)
+        mainMenuButtons = addSpellButtonToMenu(mainMenuButtons, token, LightSourcesHandler.LIGHT_SPELL_INFOS)
 
         if (Object.keys(mainMenuButtons).length == 1) {
             buttonName = Object.keys(mainMenuButtons)[0]
