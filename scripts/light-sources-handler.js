@@ -206,6 +206,7 @@ function pickUpLightItem(token, lightInfos) {
         //lamp.document.delete()
         return
     }
+    console.log(canvas.lighting.sources)
     allLightSources = canvas.lighting.sources.filter(filteringLightSource => filteringLightSource.object.actor == undefined && filteringLightSource.object.data.config.dim == lightInfos.data.light.dim)
     for (let lightSource of allLightSources) {
         if (lightSource.actor != undefined) continue
@@ -359,7 +360,7 @@ export function startInchryptianScript(token) {
     mainMenuButtons = addSpellButtonToMenu(mainMenuButtons, token, LIGHT_SPELL_INFOS)
 
     if (Object.keys(mainMenuButtons).length == 1) {
-        buttonName = Object.keys(mainMenuButtons)[0]
+        let buttonName = Object.keys(mainMenuButtons)[0]
         mainMenuButtons[buttonName].callback()
     }
     if (Object.keys(mainMenuButtons).length > 1) {
