@@ -167,10 +167,6 @@ export class LightSourcesHandler {
         LightSourcesHandler.TORCH_INFOS, LightSourcesHandler.CANDLE_INFOS, 
         LightSourcesHandler.HOODED_LANTERN_CLOSED_INFOS]
 
-    constructor() {
-
-    }
-
     getEffect(token, lightInfo) {
         return token.actor.effects.find(effect => effect.getFlag("core", "statusId") == lightInfo.effect.id)
     }
@@ -207,7 +203,7 @@ export class LightSourcesHandler {
 
     pickUpLightItem(token, lightInfos) {
         let allLightSources = canvas.tokens.objects.children
-        for (lightSource of allLightSources) {
+        for (let lightSource of allLightSources) {
             if (lightSource.actor == null) continue
             if (lightInfos.droppedItemName != lightSource.actor.name) continue
             if (!lightSourceIsClose(token, lightSource, 100)) continue
@@ -215,7 +211,7 @@ export class LightSourcesHandler {
             return
         }
         allLightSources = canvas.lighting.sources.filter(filteringLightSource => filteringLightSource.object.actor == undefined && filteringLightSource.object.data.config.dim == lightInfos.data.light.dim)
-        for (lightSource of allLightSources) {
+        for (let lightSource of allLightSources) {
             if (lightSource.actor != undefined) continue
             if (!lightSourceIsClose(token, lightSource, 150)) continue
             //lamp.object.document.delete()
@@ -233,8 +229,8 @@ export class LightSourcesHandler {
                 if (lightSourceItem != undefined) {
                     lightSourceItem.update({ data: { quantity: lightSourceItem.data.data.quantity + 1 } })
                 } else {
-                    compendiumItems = game.packs.get(LightSourcesHandler.SNOW_CUSTOM ? "world.ddb-data-hub-items" : "dnd5e.items")
-                    lightSourceItemId = compendiumItems.index.find(item => item.name == lightInfos.itemName)._id
+                    let compendiumItems = game.packs.get(LightSourcesHandler.SNOW_CUSTOM ? "world.ddb-data-hub-items" : "dnd5e.items")
+                    let lightSourceItemId = compendiumItems.index.find(item => item.name == lightInfos.itemName)._id
                     compendiumItems.getDocument(lightSourceItemId)
                         .then(item => token.actor.addEmbeddedItems([item], false))
                 }
@@ -304,7 +300,7 @@ export class LightSourcesHandler {
             return
         }
         if (Object.keys(buttons).length == 1) {
-            buttonName = Object.keys(buttons)[0]
+            let buttonName = Object.keys(buttons)[0]
             buttons[buttonName].callback()
         }
     }
@@ -362,12 +358,12 @@ export class LightSourcesHandler {
     startInchryptianScript(token) {
         let mainMenuButtons = {}
 
-        for (infos of LightSourcesHandler.LIGHT_INFO_ORDER.filter(info => info != LightSourcesHandler.LIGHT_SPELL_INFOS)) { mainMenuButtons = addItemButtonsToMenu(mainMenuButtons, token, infos) }
+        for (let infos of LightSourcesHandler.LIGHT_INFO_ORDER.filter(info => info != LightSourcesHandler.LIGHT_SPELL_INFOS)) { mainMenuButtons = addItemButtonsToMenu(mainMenuButtons, token, infos) }
 
         mainMenuButtons = addSpellButtonToMenu(mainMenuButtons, token, LightSourcesHandler.LIGHT_SPELL_INFOS)
 
         if (Object.keys(mainMenuButtons).length == 1) {
-            buttonName = Object.keys(mainMenuButtons)[0]
+            let buttonName = Object.keys(mainMenuButtons)[0]
             mainMenuButtons[buttonName].callback()
         }
         if (Object.keys(mainMenuButtons).length > 1) {
