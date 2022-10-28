@@ -351,7 +351,7 @@ function handleLightSpell(token, spellInfos, effect) {
     }
 }
 
-function startinchryptianscript(token) {
+export function startInchryptianScript(token) {
     let mainMenuButtons = {}
 
     for (infos of LIGHT_INFO_ORDER.filter( info => info != LIGHT_SPELL_INFOS )) { mainMenuButtons = addItemButtonsToMenu(mainMenuButtons, token, infos) }
