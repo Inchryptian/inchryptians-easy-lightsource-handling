@@ -70,7 +70,7 @@ export class LightSourcesHandler {
                 animation: { type: "torch", "speed": 1, "intensity": 1 }
             }
         },
-        fuel: SNOW_CUSTOM ? "Oil (flask)" : "Oil Flask"
+        fuel: LightSourcesHandler.SNOW_CUSTOM ? "Oil (flask)" : "Oil Flask"
     }
 
     static BULLSEYE_INFOS = {
@@ -93,12 +93,12 @@ export class LightSourcesHandler {
                 animation: { type: "torch", "speed": 1, "intensity": 1 }
             }
         },
-        fuel: SNOW_CUSTOM ? "Oil (flask)" : "Oil Flask"
+        fuel: LightSourcesHandler.SNOW_CUSTOM ? "Oil (flask)" : "Oil Flask"
     }
 
     static HOODED_LANTERN_CLOSED_INFOS = {
-        droppedItemName: SNOW_CUSTOM ? "Dropped Hooded Lantern" : "Dropped Hooded Lantern (closed)",
-        itemName: SNOW_CUSTOM ? "Lantern" : "Hooded Lantern",
+        droppedItemName: LightSourcesHandler.SNOW_CUSTOM ? "Dropped Hooded Lantern" : "Dropped Hooded Lantern (closed)",
+        itemName: LightSourcesHandler.SNOW_CUSTOM ? "Lantern" : "Hooded Lantern",
         germanName: "Kapuzenlaterne (geschlossen)",
         buttonName: "hoodedLanternClosed",
         effect: {
@@ -116,12 +116,12 @@ export class LightSourcesHandler {
                 animation: { type: "torch", "speed": 1, "intensity": 1 }
             }
         },
-        fuel: SNOW_CUSTOM ? "Oil (flask)" : "Oil Flask"
+        fuel: LightSourcesHandler.SNOW_CUSTOM ? "Oil (flask)" : "Oil Flask"
     }
 
     static HOODED_LANTERN_OPEN_INFOS = {
-        droppedItemName: SNOW_CUSTOM ? "Dropped Lantern" : "Dropped Hooded Lantern (open)",
-        itemName: SNOW_CUSTOM ? "Lantern" : "Hooded Lantern",
+        droppedItemName: LightSourcesHandler.SNOW_CUSTOM ? "Dropped Lantern" : "Dropped Hooded Lantern (open)",
+        itemName: LightSourcesHandler.SNOW_CUSTOM ? "Lantern" : "Hooded Lantern",
         germanName: "Kapuzenlaterne (offen)",
         buttonName: "hoodedLanternOpen",
         effect: {
@@ -139,7 +139,7 @@ export class LightSourcesHandler {
                 animation: { type: "torch", "speed": 1, "intensity": 1 }
             }
         },
-        fuel: SNOW_CUSTOM ? "Oil (flask)" : "Oil Flask"
+        fuel: LightSourcesHandler.SNOW_CUSTOM ? "Oil (flask)" : "Oil Flask"
     }
 
     static LIGHT_SPELL_INFOS = {
@@ -233,7 +233,7 @@ export class LightSourcesHandler {
                 if (lightSourceItem != undefined) {
                     lightSourceItem.update({ data: { quantity: lightSourceItem.data.data.quantity + 1 } })
                 } else {
-                    compendiumItems = game.packs.get(SNOW_CUSTOM ? "world.ddb-data-hub-items" : "dnd5e.items")
+                    compendiumItems = game.packs.get(LightSourcesHandler.SNOW_CUSTOM ? "world.ddb-data-hub-items" : "dnd5e.items")
                     lightSourceItemId = compendiumItems.index.find(item => item.name == lightInfos.itemName)._id
                     compendiumItems.getDocument(lightSourceItemId)
                         .then(item => token.actor.addEmbeddedItems([item], false))
