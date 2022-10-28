@@ -6,7 +6,8 @@ Hooks.on('renderTokenHUD', (hud, html, title) => {
     const actor = game.actors.get(title.actorId)
 
     lightButton.on('click', () => {
-        startInchryptianScript(canvas.tokens.ownedTokens.find(t => t.actor.id == title.actorId ))
+        lightSourceHandler = LightSourcesHandler()
+        lightSourceHandler.startInchryptianScript(canvas.tokens.ownedTokens.find(t => t.actor.id == title.actorId ))
     })
 
     html.children('.left').append(lightButton)
