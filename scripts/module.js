@@ -1,12 +1,10 @@
 import { createLightButton } from "./lib.js"
-import { startInchryptianScript } from "./light-sources-handler.js"
 
-Hooks.on('renderTokenHUD', (hud, html, title) => {
+Hooks.on('renderTokenHUD', (hud, html) => {
     const lightButton = createLightButton();
-    const actor = game.actors.get(title.actorId)
 
     lightButton.on('click', () => {
-        startInchryptianScript(canvas.tokens.ownedTokens.find(t => t.actor.id == title.actorId ))
+        LightSourceHandler.startInchryptianScript(hud.object)
     })
 
     html.children('.left').append(lightButton)
