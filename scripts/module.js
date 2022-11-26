@@ -1,4 +1,5 @@
-import { createLightButton } from "./lib.js"
+import { createLightButton } from "./hud-buttons.js"
+import { lightSourceHandlingSettings } from "./settings.js"
 
 Hooks.on('renderTokenHUD', (hud, html) => {
     const lightButton = createLightButton();
@@ -8,4 +9,10 @@ Hooks.on('renderTokenHUD', (hud, html) => {
     })
 
     html.children('.left').append(lightButton)
+})
+
+Hooks.on("init", () => {
+    for (let setting of lightSourceHandlingSettings) {
+        game.settings.register("inchryptians-easy-lightsource-handling", setting.settingName, setting.settingObject)
+    }
 })
