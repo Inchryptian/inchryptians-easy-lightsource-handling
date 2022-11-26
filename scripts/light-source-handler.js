@@ -1,9 +1,11 @@
-import { LIGHT_INFO_ORDER, BULLSEYE_INFOS, LAMP_INFOS, HOODED_LANTERN_OPEN_INFOS,
+import {
+    LIGHT_INFO_ORDER, BULLSEYE_INFOS, LAMP_INFOS, HOODED_LANTERN_OPEN_INFOS,
     LIGHT_SPELL_INFOS, TORCH_INFOS, CANDLE_INFOS, HOODED_LANTERN_CLOSED_INFOS,
-    NO_LIGHT_SOURCES, NO_LIGHT_SOURCES_AVAILABLE_OR_CLOSE, NO_FUEL } from "./constants.js"
+    NO_LIGHT_SOURCES, NO_LIGHT_SOURCES_AVAILABLE_OR_CLOSE, NO_FUEL
+} from "./constants.js"
 
 class LightSourceHandler {
-    static useDdbItems(){
+    static useDdbItems() {
         game.settings.get("inchryptians-easy-lightsource-handling", "ddbItems")
     }
 
@@ -21,8 +23,8 @@ class LightSourceHandler {
         if (fuelItem.data.data.quantity < 1) return NO_LIGHT_SOURCES
     }
 
-    static dropLightItem(token, lightInfos) {
-        let protoToken = duplicate(game.actors.getName(lightInfos.droppedItemName).data.token)
+    static createDroppedLightItem(token, actor, lightInfos) {
+        let protoToken = duplicate(actor.data.token)
         protoToken.x = token.center.x;
         protoToken.y = token.center.y;
         canvas.scene.createEmbeddedDocuments("Token", [protoToken])
@@ -30,6 +32,19 @@ class LightSourceHandler {
             let lightSourceItem = token.actor.items.find(e => e.name == lightInfos[this.useDdbItems() ? "ddbItemName" : "itemName"])
             lightSourceItem.update({ data: { quantity: lightSourceItem.data.data.quantity - 1 } })
         }
+    }
+
+    static dropLightItem(token, lightInfos) {
+        let actor = game.actors.getName(lightInfos.droppedItemName)
+        if (actor == undefined) {
+            let actorId = game.packs.get("inchryptians-easy-lightsource-handling.Inchryptians easy lightsource light sources").index.find(e => e.name == lightInfos.droppedItemName)._id
+            game.packs.get("inchryptians-easy-lightsource-handling.Inchryptians easy lightsource light sources").getDocument(actorId).then(actor => {
+                newActor = Actor.create(actor.data)
+                this.createDroppedLightItem(token, newActor, lightInfos)
+            })
+            return
+        }
+        this.createDroppedLightItem(token, actor, lightInfos)
     }
 
     static lightSourceIsClose(token, lightSource, distance) {
