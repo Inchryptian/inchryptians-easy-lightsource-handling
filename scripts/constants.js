@@ -1,5 +1,3 @@
-export const SNOW_CUSTOM = true // Für Snow immer true
-
 export const NO_LIGHT_SOURCES = -1
 export const NO_LIGHT_SOURCES_AVAILABLE_OR_CLOSE = -2
 export const NO_FUEL = -3
@@ -68,7 +66,8 @@ export const LAMP_INFOS = {
             animation: { type: "torch", "speed": 1, "intensity": 1 }
         }
     },
-    fuel: SNOW_CUSTOM ? "Oil (flask)" : "Oil Flask"
+    fuel: "Oil Flask",
+    ddbFuel: "Oil (flask)"
 }
 
 export const BULLSEYE_INFOS = {
@@ -91,12 +90,14 @@ export const BULLSEYE_INFOS = {
             animation: { type: "torch", "speed": 1, "intensity": 1 }
         }
     },
-    fuel: SNOW_CUSTOM ? "Oil (flask)" : "Oil Flask"
+    fuel: "Oil Flask",
+    ddbFuel: "Oil (flask)"
 }
 
 export const HOODED_LANTERN_CLOSED_INFOS = {
-    droppedItemName: SNOW_CUSTOM ? "Dropped Hooded Lantern" : "Dropped Hooded Lantern (closed)",
-    itemName: SNOW_CUSTOM ? "Lantern" : "Hooded Lantern",
+    droppedItemName: "Dropped Hooded Lantern",
+    itemName: "Hooded Lantern",
+    ddbItemName: "Lantern",
     germanName: "Kapuzenlaterne (geschlossen)",
     buttonName: "hoodedLanternClosed",
     effect: {
@@ -114,12 +115,14 @@ export const HOODED_LANTERN_CLOSED_INFOS = {
             animation: { type: "torch", "speed": 1, "intensity": 1 }
         }
     },
-    fuel: SNOW_CUSTOM ? "Oil (flask)" : "Oil Flask"
+    fuel: "Oil Flask",
+    ddbFuel: "Oil (flask)"
 }
 
 export const HOODED_LANTERN_OPEN_INFOS = {
-    droppedItemName: SNOW_CUSTOM ? "Dropped Lantern" : "Dropped Hooded Lantern (open)",
-    itemName: SNOW_CUSTOM ? "Lantern" : "Hooded Lantern",
+    droppedItemName: "Dropped Lantern",
+    itemName: "Hooded Lantern",
+    ddbItemName: "Lantern",
     germanName: "Kapuzenlaterne (offen)",
     buttonName: "hoodedLanternOpen",
     effect: {
@@ -137,7 +140,8 @@ export const HOODED_LANTERN_OPEN_INFOS = {
             animation: { type: "torch", "speed": 1, "intensity": 1 }
         }
     },
-    fuel: SNOW_CUSTOM ? "Oil (flask)" : "Oil Flask"
+    fuel: "Oil Flask",
+    ddb_fuel: "Oil (flask)"
 }
 
 export const LIGHT_SPELL_INFOS = {

@@ -1,18 +1,22 @@
 import { LIGHT_INFO_ORDER, BULLSEYE_INFOS, LAMP_INFOS, HOODED_LANTERN_OPEN_INFOS,
     LIGHT_SPELL_INFOS, TORCH_INFOS, CANDLE_INFOS, HOODED_LANTERN_CLOSED_INFOS,
-    SNOW_CUSTOM, NO_LIGHT_SOURCES, NO_LIGHT_SOURCES_AVAILABLE_OR_CLOSE, NO_FUEL } from "./constants.js"
+    NO_LIGHT_SOURCES, NO_LIGHT_SOURCES_AVAILABLE_OR_CLOSE, NO_FUEL } from "./constants.js"
 
 class LightSourceHandler {
+    static useDdbItems(){
+        game.settings.get("inchryptians-easy-lightsource-handling", "ddbItems")
+    }
+
     static getEffect(token, lightInfo) {
         return token.actor.effects.find(effect => effect.getFlag("core", "statusId") == lightInfo.effect.id)
     }
 
     static lightLightSource(token, lightInfos) {
-        let lightSources = token.actor.items.find(item => item.name == lightInfos.itemName)
+        let lightSources = token.actor.items.find(item => item.name == lightInfos[this.useDdbItems() ? "ddbItemName" : "itemName"])
         if (lightSources == undefined) return NO_LIGHT_SOURCES
         if (lightSources.data.data.quantity < 1) return NO_LIGHT_SOURCES
         if (lightInfos.fuel == undefined) return
-        let fuelItem = token.actor.items.find(e => e.name == lightInfos.fuel)
+        let fuelItem = token.actor.items.find(e => e.name == lightInfos[this.useDdbItems() ? "ddbFuel" : "fuel"])
         if (fuelItem == undefined) return NO_LIGHT_SOURCES
         if (fuelItem.data.data.quantity < 1) return NO_LIGHT_SOURCES
     }
@@ -23,7 +27,7 @@ class LightSourceHandler {
         protoToken.y = token.center.y;
         canvas.scene.createEmbeddedDocuments("Token", [protoToken])
         if (lightInfos.fuel != undefined) {
-            let lightSourceItem = token.actor.items.find(e => e.name == lightInfos.itemName)
+            let lightSourceItem = token.actor.items.find(e => e.name == lightInfos[this.useDdbItems() ? "ddbItemName" : "itemName"])
             lightSourceItem.update({ data: { quantity: lightSourceItem.data.data.quantity - 1 } })
         }
     }
@@ -43,7 +47,7 @@ class LightSourceHandler {
             if (lightSource.actor == null) continue
             if (lightInfos.droppedItemName != lightSource.actor.name) continue
             if (!this.lightSourceIsClose(token, lightSource, 100)) continue
-            //lamp.document.delete()
+            //lightSource.document.delete()
             return
         }
 
@@ -51,7 +55,7 @@ class LightSourceHandler {
         for (let lightSource of allLightSources) {
             if (lightSource.actor != undefined) continue
             if (!this.lightSourceIsClose(token, lightSource, 150)) continue
-            //lamp.object.document.delete()
+            //lightSource.object.document.delete()
             return
         }
         return NO_LIGHT_SOURCES_AVAILABLE_OR_CLOSE
@@ -62,12 +66,12 @@ class LightSourceHandler {
             ui.notifications.info(`${lightInfos.germanName} aufgehoben`)
             this.handleLightEffectAndChangeLight(token, lightInfos)
             if (lightInfos.fuel != undefined) {
-                let lightSourceItem = token.actor.items.find(item => item.name == lightInfos.itemName)
+                let lightSourceItem = token.actor.items.find(item => item.name == lightInfos[this.useDdbItems() ? "ddbItemName" : "itemName"])
                 if (lightSourceItem != undefined) {
                     lightSourceItem.update({ data: { quantity: lightSourceItem.data.data.quantity + 1 } })
                 } else {
-                    let compendiumItems = game.packs.get(SNOW_CUSTOM ? "world.ddb-data-hub-items" : "dnd5e.items")
-                    let lightSourceItemId = compendiumItems.index.find(item => item.name == lightInfos.itemName)._id
+                    let compendiumItems = game.packs.get(this.useDdbItems() ? "world.ddb-data-hub-items" : "dnd5e.items")
+                    let lightSourceItemId = compendiumItems.index.find(item => item.name == lightInfos[this.useDdbItems() ? "ddbItemName" : "itemName"])._id
                     compendiumItems.getDocument(lightSourceItemId)
                         .then(item => token.actor.addEmbeddedItems([item], false))
                 }
@@ -78,10 +82,10 @@ class LightSourceHandler {
             ui.notifications.info(`${lightInfos.germanName} angezündet`)
             this.handleLightEffectAndChangeLight(token, lightInfos)
             if (lightInfos.fuel) {
-                let lightSourceFuel = token.actor.items.find(item => item.name == lightInfos.fuel)
+                let lightSourceFuel = token.actor.items.find(item => item.name == lightInfos[this.useDdbItems() ? "ddbFuel" : "fuel"])
                 lightSourceFuel.update({ data: { quantity: lightSourceFuel.data.data.quantity - 1 } })
             } else {
-                let lightSourceItem = token.actor.items.find(item => item.name == lightInfos.itemName)
+                let lightSourceItem = token.actor.items.find(item => item.name == lightInfos[this.useDdbItems() ? "ddbItemName" : "itemName"])
                 lightSourceItem.update({ data: { quantity: lightSourceItem.data.data.quantity - 1 } })
             }
         })
