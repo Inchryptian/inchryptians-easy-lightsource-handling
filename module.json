@@ -2,7 +2,7 @@
     "name": "inchryptians-easy-lightsource-handling",
     "title": "Inchryptians easy lightsource handling",
     "description": "A simple module created to handle lightsources more easy",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "compatibility": {
         "minimum": "9",
         "verified": "9"
@@ -43,6 +43,6 @@
     ],
     "system": ["dnd5e"], 
     "url": "https://github.com/Inchryptian/inchryptians-easy-lightsource-handling/",
-    "manifest": "https://raw.githubusercontent.com/Inchryptian/inchryptians-easy-lightsource-handling/main/module.json",
-    "download": "https://codeload.github.com/Inchryptian/inchryptians-easy-lightsource-handling/zip/main"
+    "manifest": "https://raw.githubusercontent.com/Inchryptian/inchryptians-easy-lightsource-handling/version_9/module.json",
+    "download": "https://codeload.github.com/Inchryptian/inchryptians-easy-lightsource-handling/zip/version_9"
 }
