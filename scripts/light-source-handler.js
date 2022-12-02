@@ -16,9 +16,6 @@ class LightSourceHandler {
 
     static lightLightSource(token, lightInfos) {
         let lightSources = token.actor.items.find(item => item.name == lightInfos[this.useDdbItems() ? "ddbItemName" : "itemName"])
-        console.log(this.useDdbItems())
-        console.log(this.useDdbItems() ? "ddbItemName" : "itemName")
-        console.log(lightInfos[this.useDdbItems() ? "ddbItemName" : "itemName"])
         if (lightSources == undefined) return NO_LIGHT_SOURCES
         if (lightSources.data.data.quantity < 1) return NO_LIGHT_SOURCES
         if (lightInfos.fuel == undefined) return
@@ -41,7 +38,7 @@ class LightSourceHandler {
     static dropLightItem(token, lightInfos) {
         let actor = game.actors.getName(lightInfos.droppedItemName)
         if (actor == undefined) {
-            let actorsPack = game.packs.get("inchryptians-easy-lightsource-handling.Inchryptians easy lightsource light sources")
+            let actorsPack = game.packs.get("inchryptians-easy-lightsource-handling.inchryptians-easy-lightsource-light-sources")
             let actorId = actorsPack.index.find(e => e.name == lightInfos.droppedItemName)._id
             actorsPack.getDocument(actorId).then(actor => {
                 newActor = Actor.create(actor.data)
@@ -208,7 +205,7 @@ class LightSourceHandler {
                             ui.notifications.info(`${spellInfos.germanName} gewirkt`)
                             let spelldata = spellInfos.data
                             spelldata.light.color = $("input[data-edit='pickColorForLightSpell']").val()
-                            handleLightEffectAndChangeLight(token, spellInfos)
+                            this.handleLightEffectAndChangeLight(token, spellInfos)
                         },
                         icon: `<i class="fas fa-check"></i>`
                     }

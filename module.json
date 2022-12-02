@@ -18,16 +18,16 @@
     ],
     "packs": [
 		{
-			"name": "Inchryptians-easy-lightsource-handling-makros",
-			"label": "Inchryptians easy lightsource handling makros",
+			"name": "inchryptians-easy-lightsource-handling-makros",
+			"label": "inchryptians easy lightsource handling makros",
 			"path": "packs/makros.db",
 			"system" : "dnd5e",
 			"entity": "Macro",
 			"module": "inchryptians-easy-lightsource-handling"
 		},
         {
-			"name": "Inchryptians-easy-lightsource-light-sources",
-			"label": "Inchryptians easy lightsource light sources",
+			"name": "inchryptians-easy-lightsource-light-sources",
+			"label": "inchryptians easy lightsource light sources",
 			"path": "packs/lightSources.db",
 			"system" : "dnd5e",
 			"entity": "Actor",
