@@ -6,7 +6,8 @@ import {
 
 class LightSourceHandler {
     static useDdbItems() {
-        game.settings.get("inchryptians-easy-lightsource-handling", "ddbItems")
+        if(game.packs.get("world.ddb-data-hub-items") == undefined) return false
+        return game.settings.get("inchryptians-easy-lightsource-handling", "ddbItems")
     }
 
     static getEffect(token, lightInfo) {
@@ -15,6 +16,9 @@ class LightSourceHandler {
 
     static lightLightSource(token, lightInfos) {
         let lightSources = token.actor.items.find(item => item.name == lightInfos[this.useDdbItems() ? "ddbItemName" : "itemName"])
+        console.log(this.useDdbItems())
+        console.log(this.useDdbItems() ? "ddbItemName" : "itemName")
+        console.log(lightInfos[this.useDdbItems() ? "ddbItemName" : "itemName"])
         if (lightSources == undefined) return NO_LIGHT_SOURCES
         if (lightSources.data.data.quantity < 1) return NO_LIGHT_SOURCES
         if (lightInfos.fuel == undefined) return
@@ -37,8 +41,9 @@ class LightSourceHandler {
     static dropLightItem(token, lightInfos) {
         let actor = game.actors.getName(lightInfos.droppedItemName)
         if (actor == undefined) {
-            let actorId = game.packs.get("inchryptians-easy-lightsource-handling.Inchryptians easy lightsource light sources").index.find(e => e.name == lightInfos.droppedItemName)._id
-            game.packs.get("inchryptians-easy-lightsource-handling.Inchryptians easy lightsource light sources").getDocument(actorId).then(actor => {
+            let actorsPack = game.packs.get("inchryptians-easy-lightsource-handling.Inchryptians easy lightsource light sources")
+            let actorId = actorsPack.index.find(e => e.name == lightInfos.droppedItemName)._id
+            actorsPack.getDocument(actorId).then(actor => {
                 newActor = Actor.create(actor.data)
                 this.createDroppedLightItem(token, newActor, lightInfos)
             })
@@ -183,7 +188,7 @@ class LightSourceHandler {
         let effect = this.getEffect(token, spellInfos)
 
         let buttonTypeDescription = effect ? "beenden" : "wirken"
-        let lightSpellButton = createButton(`${spellInfos.germanName} ${buttonTypeDescription}`, () => this.handleLightSpell(token, spellInfos, effect), effect != undefined)
+        let lightSpellButton = this.createButton(`${spellInfos.germanName} ${buttonTypeDescription}`, () => this.handleLightSpell(token, spellInfos, effect), effect != undefined)
         mainMenuButtons[`handle${spellInfos.buttonName}Button`] = lightSpellButton
         return mainMenuButtons
     }

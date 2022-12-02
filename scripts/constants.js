@@ -5,6 +5,7 @@ export const NO_FUEL = -3
 export const TORCH_INFOS = {
     droppedItemName: "Dropped Torch",
     itemName: "Torch",
+    ddbItemName: "Torch",
     germanName: "Fackel",
     buttonName: "torch",
     effect: {
@@ -27,6 +28,7 @@ export const TORCH_INFOS = {
 export const CANDLE_INFOS = {
     droppedItemName: "Dropped Candle",
     itemName: "Candle",
+    ddbItemName: "Candle",
     germanName: "Kerze",
     buttonName: "candle",
     effect: {
@@ -49,6 +51,7 @@ export const CANDLE_INFOS = {
 export const LAMP_INFOS = {
     droppedItemName: "Dropped Lamp",
     itemName: "Lamp",
+    ddbItemName: "Lamp",
     germanName: "Lampe",
     buttonName: "lamp",
     effect: {
@@ -73,6 +76,7 @@ export const LAMP_INFOS = {
 export const BULLSEYE_INFOS = {
     droppedItemName: "Dropped Bullseye Lantern",
     itemName: "Bullseye Lantern",
+    ddbItemName: "Bullseye Lantern",
     germanName: "Bullseye-Laterne",
     buttonName: "bullseyeLantern",
     effect: {
@@ -141,7 +145,7 @@ export const HOODED_LANTERN_OPEN_INFOS = {
         }
     },
     fuel: "Oil Flask",
-    ddb_fuel: "Oil (flask)"
+    ddbFuel: "Oil (flask)"
 }
 
 export const LIGHT_SPELL_INFOS = {
