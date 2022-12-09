@@ -19,7 +19,7 @@ export const TORCH_INFOS = {
             bright: 20,
             angle: 360,
             color: "#f98026",
-            alpha: 0.4,
+            alpha: 0.3,
             animation: { type: "torch", "speed": 2, "intensity": 2 }
         }
     }
@@ -42,7 +42,7 @@ export const CANDLE_INFOS = {
             bright: 5,
             angle: 360,
             color: "#f98026",
-            alpha: 0.2,
+            alpha: 0.15,
             animation: { type: "torch", "speed": 1, "intensity": 1 }
         }
     }
@@ -61,11 +61,11 @@ export const LAMP_INFOS = {
     },
     data: {
         light: {
-            dim: 45,
-            bright: 15,
+            dim: 20,
+            bright: 10,
             angle: 360,
             color: "#f98026",
-            alpha: 0.3,
+            alpha: 0.25,
             animation: { type: "torch", "speed": 1, "intensity": 1 }
         }
     },
@@ -90,7 +90,7 @@ export const BULLSEYE_INFOS = {
             bright: 60,
             angle: 60,
             color: "#f98026",
-            alpha: 0.4,
+            alpha: 0.3,
             animation: { type: "torch", "speed": 1, "intensity": 1 }
         }
     },
@@ -140,7 +140,7 @@ export const HOODED_LANTERN_OPEN_INFOS = {
             bright: 30,
             angle: 360,
             color: "#f98026",
-            alpha: 0.4,
+            alpha: 0.3,
             animation: { type: "torch", "speed": 1, "intensity": 1 }
         }
     },
