@@ -130,8 +130,8 @@ export const HOODED_LANTERN_OPEN_INFOS = {
     germanName: "Kapuzenlaterne (offen)",
     buttonName: "hoodedLanternOpen",
     effect: {
-        id: "Hooded Lantern",
-        label: "Hooded Lantern",
+        id: "Lantern",
+        label: "Lantern",
         icon: "icons/sundries/lights/lantern-iron-yellow.webp"
     },
     data: {
@@ -162,7 +162,7 @@ export const LIGHT_SPELL_INFOS = {
             bright: 20,
             angle: 360,
             color: "#f98026",
-            alpha: 0.4,
+            alpha: 0.3,
             animation: { type: "torch", "speed": 1, "intensity": 1 }
         }
     }
