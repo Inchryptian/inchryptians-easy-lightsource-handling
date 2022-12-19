@@ -114,11 +114,9 @@ class LightSourceHandler {
     }
 
     static handleLightEffectAndChangeLight(token, lightInfos) {
-        console.log(lightInfos.data)
         token.document.toggleActiveEffect(lightInfos.effect).then(() => {
             for (let lightInfo of LIGHT_INFO_ORDER) {
                 let strongestEffect = this.getEffect(token, lightInfo)
-                console.log(strongestEffect)
                 if (strongestEffect == undefined) continue
 
                 token.document.update(lightInfo.data)
@@ -223,7 +221,7 @@ class LightSourceHandler {
         for (let infos of LIGHT_INFO_ORDER.filter(info => info != LIGHT_SPELL_INFOS)) { mainMenuButtons = this.addItemButtonsToMenu(mainMenuButtons, token, infos) }
 
         mainMenuButtons = this.addSpellButtonToMenu(mainMenuButtons, token, LIGHT_SPELL_INFOS)
-        console.log(mainMenuButtons)
+
         if (Object.keys(mainMenuButtons).length == 1) {
             let buttonName = Object.keys(mainMenuButtons)[0]
             mainMenuButtons[buttonName].callback()
