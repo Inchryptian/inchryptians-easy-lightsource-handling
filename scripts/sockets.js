@@ -10,6 +10,7 @@ export function askForLight(request){
 }
 
 function askOtherPlayerForLight(request){
+    if(LightSourceHandler.adminMode()) return
     let targetedTokens = canvas.tokens.ownedTokens.filter( token => request.userTargets.includes(token.id) )
     for(let token of targetedTokens){
         if(!token.owner) continue
