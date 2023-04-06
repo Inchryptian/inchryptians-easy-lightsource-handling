@@ -52,6 +52,13 @@
     "system": [
         "dnd5e"
     ],
+    "dependencies": [
+        {
+            "name": "socketlib",
+            "manifest": "https://raw.githubusercontent.com/manuelVo/foundryvtt-socketlib/master/module.json"
+        }
+    ],
+    "socket": true,
     "url": "https://github.com/Inchryptian/inchryptians-easy-lightsource-handling/",
     "manifest": "https://raw.githubusercontent.com/Inchryptian/inchryptians-easy-lightsource-handling/version_9/module.json",
     "download": "https://codeload.github.com/Inchryptian/inchryptians-easy-lightsource-handling/zip/version_9"

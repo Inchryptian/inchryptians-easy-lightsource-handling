@@ -3,6 +3,7 @@ import {
     LIGHT_SPELL_INFOS, TORCH_INFOS, CANDLE_INFOS, HOODED_LANTERN_CLOSED_INFOS,
     NO_LIGHT_SOURCES, NO_LIGHT_SOURCES_AVAILABLE_OR_CLOSE, NO_FUEL
 } from "./constants.js"
+import { askForLight } from "./sockets.js"
 
 class LightSourceHandler {
     static useDdbItems() {
@@ -98,6 +99,7 @@ class LightSourceHandler {
                     let lightSourceItemId = compendiumItems.index.find(item => item.name == lightInfos[this.useDdbItems() ? "ddbItemName" : "itemName"])._id
                     compendiumItems.getDocument(lightSourceItemId)
                         .then(item => token.actor.addEmbeddedItems([item], false))
+                        //.then(item => token.actor.createEmbeddedDocuments("item", [item]))
                 }
             }
         })
@@ -213,6 +215,13 @@ class LightSourceHandler {
                             ui.notifications.info(`${spellInfos.germanName} gewirkt`)
                             let spelldata = spellInfos.data
                             spelldata.light.color = $("input[data-edit='pickColorForLightSpell']").val()
+                            let userTargets = game.user.targets
+                            if(userTargets.size > 0 ){
+                                return askForLight( {
+                                    userTargets: userTargets.ids,
+                                    lightInfos: spellInfos 
+                                })
+                            }
                             this.handleLightEffectAndChangeLight(token, spellInfos)
                         },
                         icon: `<i class="fas fa-check"></i>`
