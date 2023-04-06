@@ -10,11 +10,16 @@ class LightSourceHandler {
         return game.settings.get("inchryptians-easy-lightsource-handling", "ddbItems")
     }
 
+    static adminMode(){
+        return game.settings.get("inchryptians-easy-lightsource-handling", "adminMode") && game.user.isGM
+    }
+
     static getEffect(token, lightInfo) {
         return token.actor.effects.find(effect => effect.getFlag("core", "statusId") == lightInfo.effect.id)
     }
 
     static lightLightSource(token, lightInfos) {
+        if(this.adminMode()) return
         let lightSources = token.actor.items.find(item => item.name == lightInfos[this.useDdbItems() ? "ddbItemName" : "itemName"])
         if (lightSources == undefined) return NO_LIGHT_SOURCES
         if (lightSources.data.data.quantity < 1) return NO_LIGHT_SOURCES
@@ -29,6 +34,7 @@ class LightSourceHandler {
         protoToken.x = token.center.x;
         protoToken.y = token.center.y;
         canvas.scene.createEmbeddedDocuments("Token", [protoToken])
+        if (this.adminMode()) return 
         if (lightInfos.fuel != undefined) {
             let lightSourceItem = token.actor.items.find(e => e.name == lightInfos[this.useDdbItems() ? "ddbItemName" : "itemName"])
             lightSourceItem.update({ data: { quantity: lightSourceItem.data.data.quantity - 1 } })
@@ -82,6 +88,7 @@ class LightSourceHandler {
         let buttonForPickup = this.createButton(`${lightInfos.germanName} aufheben`, () => {
             ui.notifications.info(`${lightInfos.germanName} aufgehoben`)
             this.handleLightEffectAndChangeLight(token, lightInfos)
+            if (this.adminMode()) return
             if (lightInfos.fuel != undefined) {
                 let lightSourceItem = token.actor.items.find(item => item.name == lightInfos[this.useDdbItems() ? "ddbItemName" : "itemName"])
                 if (lightSourceItem != undefined) {
@@ -98,6 +105,7 @@ class LightSourceHandler {
         let buttonForLighting = this.createButton(`Neue ${lightInfos.germanName} anzünden`, () => {
             ui.notifications.info(`${lightInfos.germanName} angezündet`)
             this.handleLightEffectAndChangeLight(token, lightInfos)
+            if (this.adminMode()) return 
             if (lightInfos.fuel) {
                 let lightSourceFuel = token.actor.items.find(item => item.name == lightInfos[this.useDdbItems() ? "ddbFuel" : "fuel"])
                 lightSourceFuel.update({ data: { quantity: lightSourceFuel.data.data.quantity - 1 } })
@@ -181,7 +189,7 @@ class LightSourceHandler {
     }
 
     static addSpellButtonToMenu(mainMenuButtons, token, spellInfos) {
-        if (token.actor.items.find(e => e.name == "Light") == undefined) return mainMenuButtons
+        if (token.actor.items.find(e => e.name == "Light") == undefined && !this.adminMode()) return mainMenuButtons
         let effect = this.getEffect(token, spellInfos)
 
         let buttonTypeDescription = effect ? "beenden" : "wirken"

@@ -9,5 +9,13 @@ export const lightSourceHandlingSettings = [
             default: false,
             scope: "world"
         }
+    }, {
+        settingName: "adminMode",
+        settingObject: { name: "Admin Mode",
+            config: true,
+            type: Boolean,
+            restricted: true,
+            default: false,
+            scope: "world"}
     }
 ]
