@@ -17,5 +17,13 @@ export const lightSourceHandlingSettings = [
             restricted: true,
             default: false,
             scope: "world"}
+    }, {
+        settingName: "lightRequestsForAdmin",
+        settingObject: { name: "Light Requests for Admin",
+            config: true,
+            type: Boolean,
+            restricted: true,
+            default: false,
+            scope: "world"}
     }
 ]
