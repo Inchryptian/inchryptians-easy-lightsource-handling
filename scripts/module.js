@@ -1,4 +1,4 @@
-import { createLightButton } from "./hud-buttons.js"
+import { createLightButton } from "./helpers/buttons.js"
 import { lightSourceHandlingSettings } from "./settings.js"
 
 Hooks.on('renderTokenHUD', (hud, html) => {

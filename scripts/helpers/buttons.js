@@ -8,3 +8,11 @@ export function createLightButton() {
 
     return $(button)
 }
+
+export function createButton(label, callbackFunction, active = true) {
+    return {
+        label: label,
+        callback: callbackFunction,
+        icon: `<i class="fas fa-${active ? "check" : "times"}"></i>`
+    }
+}

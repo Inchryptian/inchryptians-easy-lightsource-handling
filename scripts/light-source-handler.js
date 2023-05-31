@@ -1,9 +1,6 @@
-import {
-    LIGHT_INFO_ORDER, BULLSEYE_INFOS, LAMP_INFOS, HOODED_LANTERN_OPEN_INFOS,
-    LIGHT_SPELL_INFOS, TORCH_INFOS, CANDLE_INFOS, HOODED_LANTERN_CLOSED_INFOS,
-    NO_LIGHT_SOURCES, NO_LIGHT_SOURCES_AVAILABLE_OR_CLOSE, NO_FUEL
-} from "./constants.js"
+import { LIGHT_INFO_ORDER, LIGHT_SPELL_INFOS, NO_LIGHT_SOURCES, NO_LIGHT_SOURCES_AVAILABLE_OR_CLOSE } from "./constants.js"
 import { askForLight } from "./sockets.js"
+import { createButton } from "./helpers/buttons.js"
 
 class LightSourceHandler {
     static useDdbItems() {
@@ -86,7 +83,7 @@ class LightSourceHandler {
     }
 
     static createLightSourceButtonObjects(token, lightInfos) {
-        let buttonForPickup = this.createButton(`${lightInfos.germanName} aufheben`, () => {
+        let buttonForPickup = createButton(`${lightInfos.germanName} aufheben`, () => {
             ui.notifications.info(`${lightInfos.germanName} aufgehoben`)
             this.handleLightEffectAndChangeLight(token, lightInfos)
             if (this.adminMode()) return
@@ -98,13 +95,12 @@ class LightSourceHandler {
                     let compendiumItems = game.packs.get(this.useDdbItems() ? "world.ddb-data-hub-items" : "dnd5e.items")
                     let lightSourceItemId = compendiumItems.index.find(item => item.name == lightInfos[this.useDdbItems() ? "ddbItemName" : "itemName"])._id
                     compendiumItems.getDocument(lightSourceItemId)
-                        .then(item => token.actor.addEmbeddedItems([item], false))
-                        //.then(item => token.actor.createEmbeddedDocuments("item", [item]))
+                        .then(item => { token.actor.createEmbeddedDocuments("Item", [item.data]) })
                 }
             }
         })
 
-        let buttonForLighting = this.createButton(`Neue ${lightInfos.germanName} anzünden`, () => {
+        let buttonForLighting = createButton(`Neue ${lightInfos.germanName} anzünden`, () => {
             ui.notifications.info(`${lightInfos.germanName} angezündet`)
             this.handleLightEffectAndChangeLight(token, lightInfos)
             if (this.adminMode()) return 
@@ -137,13 +133,13 @@ class LightSourceHandler {
     }
 
     static extinguishOrDropLightItemDialog(token, lightInfos) {
-        let dropLightItemButton = this.createButton(`${lightInfos.germanName} fallen lassen`, () => {
+        let dropLightItemButton = createButton(`${lightInfos.germanName} fallen lassen`, () => {
             ui.notifications.info(`${lightInfos.germanName} fallen gelassen`)
             this.dropLightItem(token, lightInfos)
             this.handleLightEffectAndChangeLight(token, lightInfos)
         }, false)
 
-        let extinguishTorchButton = this.createButton(`${lightInfos.germanName} löschen`, () => {
+        let extinguishTorchButton = createButton(`${lightInfos.germanName} löschen`, () => {
             ui.notifications.info(`${lightInfos.germanName} gelöscht`)
             this.handleLightEffectAndChangeLight(token, lightInfos)
         }, false)
@@ -175,17 +171,9 @@ class LightSourceHandler {
         }
     }
 
-    static createButton(label, callbackFunction, active = true) {
-        return {
-            label: label,
-            callback: callbackFunction,
-            icon: `<i class="fas fa-${active ? "check" : "times"}"></i>`
-        }
-    }
-
     static addItemButtonsToMenu(mainMenuButtons, token, lightInfos) {
         let lightItemButtons = this.createLightSourceButtonObjects(token, lightInfos)
-        let handleLightItemButton = this.createButton(lightInfos.germanName, () => this.handleLightItem(token, lightItemButtons, lightInfos), this.getEffect(token, lightInfos) != undefined)
+        let handleLightItemButton = createButton(lightInfos.germanName, () => this.handleLightItem(token, lightItemButtons, lightInfos), this.getEffect(token, lightInfos) != undefined)
         if (Object.keys(lightItemButtons).length > 0 || this.getEffect(token, lightInfos)) mainMenuButtons[`handle${lightInfos.buttonName}Button`] = handleLightItemButton
         return mainMenuButtons
     }
@@ -195,7 +183,7 @@ class LightSourceHandler {
         if (token.actor.items.find(e => e.name == "Light") == undefined && !effect && !this.adminMode()) return mainMenuButtons
 
         let buttonTypeDescription = effect ? "beenden" : "wirken"
-        let lightSpellButton = this.createButton(`${spellInfos.germanName} ${buttonTypeDescription}`, () => this.handleLightSpell(token, spellInfos, effect), effect != undefined)
+        let lightSpellButton = createButton(`${spellInfos.germanName} ${buttonTypeDescription}`, () => this.handleLightSpell(token, spellInfos, effect), effect != undefined)
         mainMenuButtons[`handle${spellInfos.buttonName}Button`] = lightSpellButton
         return mainMenuButtons
     }
