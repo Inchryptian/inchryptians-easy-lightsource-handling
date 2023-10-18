@@ -13,29 +13,29 @@ class LightSourceHandler {
     }
 
     static getEffect(token, lightInfo) {
-        return token.actor.effects.find(effect => effect.getFlag("core", "statusId") == lightInfo.effect.id)
+        return token.actor.statuses.find(effect => effect == lightInfo.effect.id)
     }
 
     static lightLightSource(token, lightInfos) {
         if(this.adminMode()) return
         let lightSources = token.actor.items.find(item => item.name == lightInfos[this.useDdbItems() ? "ddbItemName" : "itemName"])
         if (lightSources == undefined) return NO_LIGHT_SOURCES
-        if (lightSources.data.data.quantity < 1) return NO_LIGHT_SOURCES
+        if (lightSources.quantity < 1) return NO_LIGHT_SOURCES
         if (lightInfos.fuel == undefined) return
         let fuelItem = token.actor.items.find(e => e.name == lightInfos[this.useDdbItems() ? "ddbFuel" : "fuel"])
         if (fuelItem == undefined) return NO_LIGHT_SOURCES
-        if (fuelItem.data.data.quantity < 1) return NO_LIGHT_SOURCES
+        if (fuelItem.quantity < 1) return NO_LIGHT_SOURCES
     }
 
     static createDroppedLightItem(token, actor, lightInfos) {
-        let protoToken = duplicate(actor.data.token)
+        let protoToken = duplicate(actor.prototypeToken)
         protoToken.x = token.center.x;
         protoToken.y = token.center.y;
         canvas.scene.createEmbeddedDocuments("Token", [protoToken])
         if (this.adminMode()) return 
         if (lightInfos.fuel != undefined) {
             let lightSourceItem = token.actor.items.find(e => e.name == lightInfos[this.useDdbItems() ? "ddbItemName" : "itemName"])
-            lightSourceItem.update({ data: { quantity: lightSourceItem.data.data.quantity - 1 } })
+            lightSourceItem.update({ data: { quantity: lightSourceItem.system.quantity - 1 } })
         }
     }
 
@@ -58,7 +58,7 @@ class LightSourceHandler {
         if (!(xVal <= distance && xVal >= -distance)) return false
         let yVal = lightSource.y - token.y
         if (!(yVal <= distance && yVal >= -distance)) return false
-
+        console.log("LIGHT CLOSE")
         return true
     }
 
@@ -72,7 +72,13 @@ class LightSourceHandler {
             return
         }
 
-        allLightSources = canvas.lighting.sources.filter(filteringLightSource => filteringLightSource.object.actor == undefined && filteringLightSource.object.data.config.dim == lightInfos.data.light.dim)
+        allLightSources = canvas.effects.lightSources.filter(filteringLightSource => { 
+            if(filteringLightSource.object == null) return
+            const lightSourceDocument = filteringLightSource.object.document
+            if("light" in lightSourceDocument) return lightSourceDocument.light.dim == lightInfos.data.light.dim
+            if("config" in lightSourceDocument) return lightSourceDocument.config.dim == lightInfos.data.light.dim
+        })
+
         for (let lightSource of allLightSources) {
             if (lightSource.actor != undefined) continue
             if (!this.lightSourceIsClose(token, lightSource, 150)) continue
@@ -90,7 +96,7 @@ class LightSourceHandler {
             if (lightInfos.fuel != undefined) {
                 let lightSourceItem = token.actor.items.find(item => item.name == lightInfos[this.useDdbItems() ? "ddbItemName" : "itemName"])
                 if (lightSourceItem != undefined) {
-                    lightSourceItem.update({ data: { quantity: lightSourceItem.data.data.quantity + 1 } })
+                    lightSourceItem.update({ data: { quantity: lightSourceItem.quantity + 1 } })
                 } else {
                     let compendiumItems = game.packs.get(this.useDdbItems() ? "world.ddb-data-hub-items" : "dnd5e.items")
                     let lightSourceItemId = compendiumItems.index.find(item => item.name == lightInfos[this.useDdbItems() ? "ddbItemName" : "itemName"])._id
@@ -106,10 +112,10 @@ class LightSourceHandler {
             if (this.adminMode()) return 
             if (lightInfos.fuel) {
                 let lightSourceFuel = token.actor.items.find(item => item.name == lightInfos[this.useDdbItems() ? "ddbFuel" : "fuel"])
-                lightSourceFuel.update({ data: { quantity: lightSourceFuel.data.data.quantity - 1 } })
+                lightSourceFuel.update({ data: { quantity: lightSourceFuel.system.quantity - 1 } })
             } else {
                 let lightSourceItem = token.actor.items.find(item => item.name == lightInfos[this.useDdbItems() ? "ddbItemName" : "itemName"])
-                lightSourceItem.update({ data: { quantity: lightSourceItem.data.data.quantity - 1 } })
+                lightSourceItem.update({ data: { quantity: lightSourceItem.system.quantity - 1 } })
             }
         })
 
@@ -237,7 +243,7 @@ class LightSourceHandler {
                 buttons: mainMenuButtons,
             }, { width: 600 }).render(true)
         }
-        if (isObjectEmpty(mainMenuButtons)) {
+        if (isEmpty(mainMenuButtons)) {
             ui.notifications.error(`Keine Lichtquellen im Inventar oder in der Nähe`)
             return
         }
