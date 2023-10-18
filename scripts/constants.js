@@ -154,7 +154,7 @@ export const LIGHT_SPELL_INFOS = {
     effect: {
         id: "Light",
         label: "Light",
-        icon: "systems/dnd5e/icons/spells/light-sky-1.jpg"
+        icon: "icons/magic/light/explosion-star-small-blue-yellow.webp"
     },
     data: {
         light: {

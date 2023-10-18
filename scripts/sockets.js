@@ -11,7 +11,7 @@ export function askForLight(request){
 }
 
 function askOtherPlayerForLight(request){
-    if(!game.settings.get("inchryptians-easy-lightsource-handling", "lightRequestsForAdmin") && game.player.isGM) return
+    if(!game.settings.get("inchryptians-easy-lightsource-handling", "lightRequestsForAdmin") && game.user.isGM) return
     let targetedTokens = canvas.tokens.ownedTokens.filter( token => request.userTargets.includes(token.id) )
     for(let token of targetedTokens){
         if(!token.owner) continue

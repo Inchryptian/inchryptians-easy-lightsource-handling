@@ -96,12 +96,12 @@ class LightSourceHandler {
             if (lightInfos.fuel != undefined) {
                 let lightSourceItem = token.actor.items.find(item => item.name == lightInfos[this.useDdbItems() ? "ddbItemName" : "itemName"])
                 if (lightSourceItem != undefined) {
-                    lightSourceItem.update({ data: { quantity: lightSourceItem.quantity + 1 } })
+                    lightSourceItem.update({ data: { quantity: lightSourceItem.system.quantity + 1 } })
                 } else {
                     let compendiumItems = game.packs.get(this.useDdbItems() ? "world.ddb-data-hub-items" : "dnd5e.items")
                     let lightSourceItemId = compendiumItems.index.find(item => item.name == lightInfos[this.useDdbItems() ? "ddbItemName" : "itemName"])._id
                     compendiumItems.getDocument(lightSourceItemId)
-                        .then(item => { token.actor.createEmbeddedDocuments("Item", [item.data]) })
+                        .then(item => { console.log(item); token.actor.createEmbeddedDocuments("Item", [item]) })
                 }
             }
         })
