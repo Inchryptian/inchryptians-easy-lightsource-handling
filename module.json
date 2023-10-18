@@ -23,8 +23,6 @@
       "url": "https://twitter.com/ArtworkLoox"
     }
   ],
-  "packs": [
-  ],
   "languages": [
     {
       "lang": "de",
@@ -47,5 +45,29 @@
         "compatibility": {}
       }
     ]
-  }
+  },
+  "packs": [
+    {
+      "name": "light-source-actors",
+      "label": "LightSourceActors",
+      "path": "packs/light-source-actors",
+      "type": "Actor",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "dnd5e"
+    },
+    {
+      "name": "scripts",
+      "label": "Scripts",
+      "path": "packs/scripts",
+      "type": "Macro",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "dnd5e"
+    }
+  ]
 }
