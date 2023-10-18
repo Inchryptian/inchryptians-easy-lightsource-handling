@@ -1,65 +1,51 @@
 {
-    "name": "inchryptians-easy-lightsource-handling",
-    "title": "Inchryptians easy lightsource handling",
-    "description": "A simple module created to handle lightsources more easy",
-    "version": "0.1.12",
-    "compatibility": {
-        "minimum": "9",
-        "verified": "9.280"
+  "title": "Inchryptians easy lightsource handling",
+  "description": "A simple module created to handle lightsources more easy",
+  "version": "0.1.12",
+  "compatibility": {
+    "minimum": "11",
+    "verified": "11"
+  },
+  "esmodules": [
+    "scripts/light-source-handler.js",
+    "scripts/module.js"
+  ],
+  "authors": [
+    {
+      "name": "Inchryptian"
     },
-    "esmodules": [
-        "scripts/light-source-handler.js",
-        "scripts/module.js"
-    ],
-    "authors": [
-        {
-            "name": "Inchryptian"
-        },
-        {
-            "name": "Snowryo",
-            "url": "https://www.twitch.tv/snowryo"
-        },
-        {
-            "name": "loox",
-            "url": "https://twitter.com/ArtworkLoox"
-        }
-    ],
-    "packs": [
-        {
-            "name": "inchryptians-easy-lightsource-handling-makros",
-            "label": "inchryptians easy lightsource handling makros",
-            "path": "packs/makros.db",
-            "system": "dnd5e",
-            "entity": "Macro",
-            "module": "inchryptians-easy-lightsource-handling"
-        },
-        {
-            "name": "inchryptians-easy-lightsource-light-sources",
-            "label": "inchryptians easy lightsource light sources",
-            "path": "packs/lightSources.db",
-            "system": "dnd5e",
-            "entity": "Actor",
-            "module": "inchryptians-easy-lightsource-handling"
-        }
-    ],
-    "languages": [
-        {
-            "lang": "de",
-            "name": "Deutsch",
-            "path": "languages/de.json"
-        }
-    ],
-    "system": [
-        "dnd5e"
-    ],
-    "dependencies": [
-        {
-            "name": "socketlib",
-            "manifest": "https://raw.githubusercontent.com/manuelVo/foundryvtt-socketlib/master/module.json"
-        }
-    ],
-    "socket": true,
-    "url": "https://github.com/Inchryptian/inchryptians-easy-lightsource-handling/",
-    "manifest": "https://raw.githubusercontent.com/Inchryptian/inchryptians-easy-lightsource-handling/version_9/module.json",
-    "download": "https://codeload.github.com/Inchryptian/inchryptians-easy-lightsource-handling/zip/version_9"
+    {
+      "name": "Snowryo",
+      "url": "https://www.twitch.tv/snowryo"
+    },
+    {
+      "name": "loox",
+      "url": "https://twitter.com/ArtworkLoox"
+    }
+  ],
+  "packs": [
+  ],
+  "languages": [
+    {
+      "lang": "de",
+      "name": "Deutsch",
+      "path": "languages/de.json",
+      "flags": {}
+    }
+  ],
+  "socket": true,
+  "url": "https://github.com/Inchryptian/inchryptians-easy-lightsource-handling/",
+  "manifest": "https://raw.githubusercontent.com/Inchryptian/inchryptians-easy-lightsource-handling/version_11/module.json",
+  "download": "https://codeload.github.com/Inchryptian/inchryptians-easy-lightsource-handling/zip/version_11",
+  "id": "inchryptians-easy-lightsource-handling",
+  "relationships": {
+    "requires": [
+      {
+        "id": "socketlib",
+        "type": "module",
+        "manifest": "https://raw.githubusercontent.com/manuelVo/foundryvtt-socketlib/master/module.json",
+        "compatibility": {}
+      }
+    ]
+  }
 }
