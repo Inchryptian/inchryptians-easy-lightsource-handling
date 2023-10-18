@@ -1,7 +1,7 @@
 {
   "title": "Inchryptians easy lightsource handling",
   "description": "A simple module created to handle lightsources more easy",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "compatibility": {
     "minimum": "11",
     "verified": "11"
