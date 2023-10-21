@@ -1,9 +1,10 @@
-let mousePosition = canvas.app.renderer.plugins.interaction.mouse.getLocalPosition(canvas.app.stage);
+let mousePosition = canvas.mousePosition
 let lightColor = "#f98026"
 
 new Dialog({
     title: "Lichtquelle auswählen",
     buttons: {
+        //von hier kopieren
         candle: {
             label: "Candle",
             callback: () => {
@@ -12,6 +13,7 @@ new Dialog({
                     x: mousePosition.x,
                     y: mousePosition.y,
                     rotation: 0,
+                    darkness: {min: 0.5, max: 1},
                     config: {
                         dim: 10,
                         bright: 5,
@@ -24,6 +26,7 @@ new Dialog({
                 ])
             }
         },
+        //bis hier kopieren
         torch: {
             label: "Torch",
             callback: () => {
@@ -32,6 +35,7 @@ new Dialog({
                     x: mousePosition.x,
                     y: mousePosition.y,
                     rotation: 0,
+                    darkness: {min: 0.5, max: 1},
                     config: {
                         dim: 40,
                         bright: 20,
@@ -52,6 +56,7 @@ new Dialog({
                     x: mousePosition.x,
                     y: mousePosition.y,
                     rotation: 0,
+                    darkness: {min: 0.5, max: 1},
                     config: {
                         dim: 45,
                         bright: 15,
@@ -72,6 +77,7 @@ new Dialog({
                     x: mousePosition.x,
                     y: mousePosition.y,
                     rotation: 0,
+                    darkness: {min: 0.5, max: 1},
                     config: {
                         dim: 5,
                         bright: 0,
@@ -92,6 +98,7 @@ new Dialog({
                     x: mousePosition.x,
                     y: mousePosition.y,
                     rotation: 0,
+                    darkness: {min: 0.5, max: 1},
                     config: {
                         dim: 60,
                         bright: 30,
@@ -112,6 +119,7 @@ new Dialog({
                     x: mousePosition.x,
                     y: mousePosition.y,
                     rotation: 0,
+                    darkness: {min: 0.5, max: 1},
                     config: {
                         dim: 120,
                         bright: 60,
@@ -124,5 +132,20 @@ new Dialog({
                 ])
             }
         },
+        daylight: {
+            label: "Daylight",
+            callback: () => {
+                canvas.scene.createEmbeddedDocuments("AmbientLight", [{
+                    x: mousePosition.x,
+                    y: mousePosition.y,
+
+                    walls: false,
+                    darkness: {min: 0, max: 0.5},
+                    bright: 100,
+                    config: { luminosity: 0.4 }
+                }
+                ])
+            }
+        }
     }
 }).render(true);

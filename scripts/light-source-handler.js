@@ -1,4 +1,4 @@
-import { LIGHT_INFO_ORDER, LIGHT_SPELL_INFOS, NO_LIGHT_SOURCES, NO_LIGHT_SOURCES_AVAILABLE_OR_CLOSE } from "./constants.js"
+import { LIGHT_INFO_ORDER, LIGHT_SPELL_INFOS, NO_LIGHT_SOURCES, NO_LIGHT_SOURCES_AVAILABLE_OR_CLOSE, LIGHT_BUTTONS_ORDER } from "./constants.js"
 import { askForLight } from "./sockets.js"
 import { createButton } from "./helpers/buttons.js"
 
@@ -229,7 +229,7 @@ class LightSourceHandler {
     static startInchryptianScript(token) {
         let mainMenuButtons = {}
 
-        for (let infos of LIGHT_INFO_ORDER.filter(info => info != LIGHT_SPELL_INFOS)) { mainMenuButtons = this.addItemButtonsToMenu(mainMenuButtons, token, infos) }
+        for (let infos of LIGHT_BUTTONS_ORDER.filter(info => info != LIGHT_SPELL_INFOS)) { mainMenuButtons = this.addItemButtonsToMenu(mainMenuButtons, token, infos) }
 
         mainMenuButtons = this.addSpellButtonToMenu(mainMenuButtons, token, LIGHT_SPELL_INFOS)
 
