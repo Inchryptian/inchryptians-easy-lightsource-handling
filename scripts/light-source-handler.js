@@ -189,7 +189,7 @@ class LightSourceHandler {
         if (token.actor.items.find(e => e.name == "Light") == undefined && !effect && !this.adminMode()) return mainMenuButtons
 
         let buttonTypeDescription = effect ? "beenden" : "wirken"
-        let lightSpellButton = createButton(`${spellInfos.germanName} ${buttonTypeDescription}`, () => this.handleLightSpell(token, spellInfos, effect), effect != undefined)
+        let lightSpellButton = createButton( spellInfos.germanName, () => this.handleLightSpell(token, spellInfos, effect), effect != undefined)
         mainMenuButtons[`handle${spellInfos.buttonName}Button`] = lightSpellButton
         return mainMenuButtons
     }

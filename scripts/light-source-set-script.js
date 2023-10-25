@@ -27,27 +27,6 @@ new Dialog({
             }
         },
         //bis hier kopieren
-        torch: {
-            label: "Torch",
-            callback: () => {
-                canvas.scene.createEmbeddedDocuments("AmbientLight", [{
-                    t: "l", // l for local. The other option is g for global.
-                    x: mousePosition.x,
-                    y: mousePosition.y,
-                    rotation: 0,
-                    darkness: {min: 0.5, max: 1},
-                    config: {
-                        dim: 40,
-                        bright: 20,
-                        angle: 360,
-                        color: lightColor,
-                        alpha: 0.4,
-                        animation: { type: "torch", "speed": 2, "intensity": 2 }
-                    }
-                }
-                ])
-            }
-        },
         lamp: {
             label: "Lamp",
             callback: () => {
@@ -64,6 +43,27 @@ new Dialog({
                         color: lightColor,
                         alpha: 0.3,
                         animation: { type: "torch", "speed": 1, "intensity": 1 }
+                    }
+                }
+                ])
+            }
+        },
+        torch: {
+            label: "Torch",
+            callback: () => {
+                canvas.scene.createEmbeddedDocuments("AmbientLight", [{
+                    t: "l", // l for local. The other option is g for global.
+                    x: mousePosition.x,
+                    y: mousePosition.y,
+                    rotation: 0,
+                    darkness: {min: 0.5, max: 1},
+                    config: {
+                        dim: 40,
+                        bright: 20,
+                        angle: 360,
+                        color: lightColor,
+                        alpha: 0.4,
+                        animation: { type: "torch", "speed": 3, "intensity": 2 }
                     }
                 }
                 ])

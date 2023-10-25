@@ -6,7 +6,7 @@ export const TORCH_INFOS = {
     droppedItemName: "Dropped Torch",
     itemName: "Torch",
     ddbItemName: "Torch",
-    germanName: "Fackel",
+    germanName: "Torch",
     buttonName: "torch",
     effect: {
         id: "Torch",
@@ -20,7 +20,7 @@ export const TORCH_INFOS = {
             angle: 360,
             color: "#f98026",
             alpha: 0.3,
-            animation: { type: "torch", "speed": 2, "intensity": 2 }
+            animation: { type: "torch", "speed": 3, "intensity": 2 }
         }
     }
 }
@@ -29,7 +29,7 @@ export const CANDLE_INFOS = {
     droppedItemName: "Dropped Candle",
     itemName: "Candle",
     ddbItemName: "Candle",
-    germanName: "Kerze",
+    germanName: "Candle",
     buttonName: "candle",
     effect: {
         id: "Candle",
@@ -52,7 +52,7 @@ export const LAMP_INFOS = {
     droppedItemName: "Dropped Lamp",
     itemName: "Lamp",
     ddbItemName: "Lamp",
-    germanName: "Lampe",
+    germanName: "Lamp",
     buttonName: "lamp",
     effect: {
         id: "Lamp",
@@ -77,7 +77,7 @@ export const BULLSEYE_INFOS = {
     droppedItemName: "Dropped Bullseye Lantern",
     itemName: "Bullseye Lantern",
     ddbItemName: "Bullseye Lantern",
-    germanName: "Bullseye-Laterne",
+    germanName: "Bullseye",
     buttonName: "bullseyeLantern",
     effect: {
         id: "Bullseye",
@@ -102,7 +102,7 @@ export const HOODED_LANTERN_CLOSED_INFOS = {
     droppedItemName: "Dropped Hooded Lantern",
     itemName: "Hooded Lantern",
     ddbItemName: "Lantern",
-    germanName: "Kapuzenlaterne (geschlossen)",
+    germanName: "Hooded",
     buttonName: "hoodedLanternClosed",
     effect: {
         id: "Hooded Lantern",
@@ -127,7 +127,7 @@ export const HOODED_LANTERN_OPEN_INFOS = {
     droppedItemName: "Dropped Lantern",
     itemName: "Hooded Lantern",
     ddbItemName: "Lantern",
-    germanName: "Kapuzenlaterne (offen)",
+    germanName: "Lantern",
     buttonName: "hoodedLanternOpen",
     effect: {
         id: "Lantern",
@@ -171,5 +171,5 @@ export const LIGHT_SPELL_INFOS = {
 export const LIGHT_INFO_ORDER = [BULLSEYE_INFOS, LAMP_INFOS, HOODED_LANTERN_OPEN_INFOS,
     LIGHT_SPELL_INFOS, TORCH_INFOS, CANDLE_INFOS, HOODED_LANTERN_CLOSED_INFOS]
 
-export const LIGHT_BUTTONS_ORDER = [CANDLE_INFOS, LAMP_INFOS, TORCH_INFOS, HOODED_LANTERN_OPEN_INFOS, HOODED_LANTERN_CLOSED_INFOS,
+export const LIGHT_BUTTONS_ORDER = [CANDLE_INFOS, LAMP_INFOS, TORCH_INFOS, HOODED_LANTERN_CLOSED_INFOS, HOODED_LANTERN_OPEN_INFOS,
     BULLSEYE_INFOS, LIGHT_SPELL_INFOS]
