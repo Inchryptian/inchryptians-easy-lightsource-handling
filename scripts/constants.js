@@ -13,16 +13,7 @@ export const TORCH_INFOS = {
         label: "Torch",
         icon: "icons/sundries/lights/torch-brown-lit.webp"
     },
-    data: {
-        light: {
-            dim: 40,
-            bright: 20,
-            angle: 360,
-            color: "#f98026",
-            alpha: 0.3,
-            animation: { type: "torch", "speed": 3, "intensity": 2 }
-        }
-    }
+    data: light({ animation: { type: "torch", "speed": 3, "intensity": 2 } })
 }
 
 export const CANDLE_INFOS = {
@@ -36,16 +27,7 @@ export const CANDLE_INFOS = {
         label: "Candle",
         icon: "icons/sundries/lights/candle-unlit-tan.webp"
     },
-    data: {
-        light: {
-            dim: 10,
-            bright: 5,
-            angle: 360,
-            color: "#f98026",
-            alpha: 0.15,
-            animation: { type: "torch", "speed": 1, "intensity": 1 }
-        }
-    }
+    data: light({ dim: 10, bright: 5, alpha: 0.15 })
 }
 
 export const LAMP_INFOS = {
@@ -59,16 +41,7 @@ export const LAMP_INFOS = {
         label: "Lamp",
         icon: "https://assets.forge-vtt.com/bazaar/systems/dnd5e/assets/icons/items/inventory/lamp.jpg"
     },
-    data: {
-        light: {
-            dim: 20,
-            bright: 10,
-            angle: 360,
-            color: "#f98026",
-            alpha: 0.25,
-            animation: { type: "torch", "speed": 1, "intensity": 1 }
-        }
-    },
+    data: light({ dim: 20, bright: 10, alpha: 0.25 }),
     fuel: "Oil Flask",
     ddbFuel: "Oil (flask)"
 }
@@ -84,16 +57,7 @@ export const BULLSEYE_INFOS = {
         label: "Bullseye",
         icon: "icons/sundries/lights/lantern-bullseye-signal-copper.webp"
     },
-    data: {
-        light: {
-            dim: 120,
-            bright: 60,
-            angle: 60,
-            color: "#f98026",
-            alpha: 0.3,
-            animation: { type: "torch", "speed": 1, "intensity": 1 }
-        }
-    },
+    data: light({ dim: 120, bright: 60, angle: 60, alpha: 0.3 }),
     fuel: "Oil Flask",
     ddbFuel: "Oil (flask)"
 }
@@ -109,16 +73,7 @@ export const HOODED_LANTERN_CLOSED_INFOS = {
         label: "Hooded Lantern",
         icon: "icons/sundries/lights/lantern-iron-yellow.webp"
     },
-    data: {
-        light: {
-            dim: 5,
-            bright: 0,
-            angle: 360,
-            color: "#f98026",
-            alpha: 0.2,
-            animation: { type: "torch", "speed": 1, "intensity": 1 }
-        }
-    },
+    data: light({ dim: 5, bright: 0, alpha: 0.2 }),
     fuel: "Oil Flask",
     ddbFuel: "Oil (flask)"
 }
@@ -134,16 +89,7 @@ export const HOODED_LANTERN_OPEN_INFOS = {
         label: "Lantern",
         icon: "icons/sundries/lights/lantern-iron-yellow.webp"
     },
-    data: {
-        light: {
-            dim: 60,
-            bright: 30,
-            angle: 360,
-            color: "#f98026",
-            alpha: 0.3,
-            animation: { type: "torch", "speed": 1, "intensity": 1 }
-        }
-    },
+    data: light({ dim: 60, bright: 30 }),
     fuel: "Oil Flask",
     ddbFuel: "Oil (flask)"
 }
@@ -156,16 +102,7 @@ export const LIGHT_SPELL_INFOS = {
         label: "Light",
         icon: "icons/magic/light/explosion-star-small-blue-yellow.webp"
     },
-    data: {
-        light: {
-            dim: 40,
-            bright: 20,
-            angle: 360,
-            color: "#f98026",
-            alpha: 0.3,
-            animation: { type: "torch", "speed": 1, "intensity": 1 }
-        }
-    }
+    data: light()
 }
 
 export const LIGHT_INFO_ORDER = [BULLSEYE_INFOS, LAMP_INFOS, HOODED_LANTERN_OPEN_INFOS,
@@ -173,3 +110,7 @@ export const LIGHT_INFO_ORDER = [BULLSEYE_INFOS, LAMP_INFOS, HOODED_LANTERN_OPEN
 
 export const LIGHT_BUTTONS_ORDER = [CANDLE_INFOS, LAMP_INFOS, TORCH_INFOS, HOODED_LANTERN_CLOSED_INFOS, HOODED_LANTERN_OPEN_INFOS,
     BULLSEYE_INFOS, LIGHT_SPELL_INFOS]
+
+function light({ dim = 40, bright = 20, angle = 360, color = "#f98026", alpha = 0.3, animation = { type: "torch", speed: 1, intensity: 1 } } = {}) {
+    return { light: { dim, bright, angle, color, alpha, animation } }
+}

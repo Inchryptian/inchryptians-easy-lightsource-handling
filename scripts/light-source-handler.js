@@ -2,7 +2,8 @@ import { LIGHT_INFO_ORDER, LIGHT_SPELL_INFOS, NO_LIGHT_SOURCES, NO_LIGHT_SOURCES
 import { askForLight } from "./sockets.js"
 import { createButton } from "./helpers/buttons.js"
 
-class LightSourceHandler {
+export default class LightSourceHandler {
+
     static useDdbItems() {
         if(game.packs.get("world.ddb-data-hub-items") == undefined) return false
         return game.settings.get("inchryptians-easy-lightsource-handling", "ddbItems")
@@ -130,7 +131,7 @@ class LightSourceHandler {
             for (let lightInfo of LIGHT_INFO_ORDER) {
                 let strongestEffect = this.getEffect(token, lightInfo)
                 if (strongestEffect == undefined) continue
-
+                lightInfo.data.light.color = game.settings.get("inchryptians-easy-lightsource-handling", "lightColor")
                 token.document.update(lightInfo.data)
                 return
             }
@@ -188,7 +189,6 @@ class LightSourceHandler {
         let effect = this.getEffect(token, spellInfos)
         if (token.actor.items.find(e => e.name == "Light") == undefined && !effect && !this.adminMode()) return mainMenuButtons
 
-        let buttonTypeDescription = effect ? "beenden" : "wirken"
         let lightSpellButton = createButton( spellInfos.germanName, () => this.handleLightSpell(token, spellInfos, effect), effect != undefined)
         mainMenuButtons[`handle${spellInfos.buttonName}Button`] = lightSpellButton
         return mainMenuButtons
@@ -228,7 +228,6 @@ class LightSourceHandler {
 
     static startInchryptianScript(token) {
         let mainMenuButtons = {}
-
         for (let infos of LIGHT_BUTTONS_ORDER.filter(info => info != LIGHT_SPELL_INFOS)) { mainMenuButtons = this.addItemButtonsToMenu(mainMenuButtons, token, infos) }
 
         mainMenuButtons = this.addSpellButtonToMenu(mainMenuButtons, token, LIGHT_SPELL_INFOS)
@@ -249,5 +248,3 @@ class LightSourceHandler {
         }
     }
 }
-
-window.LightSourceHandler = LightSourceHandler

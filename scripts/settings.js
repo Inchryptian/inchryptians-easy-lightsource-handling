@@ -25,5 +25,13 @@ export const lightSourceHandlingSettings = [
             restricted: true,
             default: false,
             scope: "world"}
+    }, {
+        settingName: "lightColor",
+        settingObject: { name: "Player Light Source Color",
+            config: true,
+            type: String,
+            restricted: true,
+            default: "#f98026",
+            scope: "world"}
     }
 ]

@@ -1,5 +1,3 @@
-2023/10/25-14:37:54.854 16dc Recovering log #47
-2023/10/25-14:37:54.854 16dc Level-0 table #49: started
-2023/10/25-14:37:54.974 16dc Level-0 table #49: 4714 bytes OK
-2023/10/25-14:37:55.105 16dc Delete type=0 #47
-2023/10/25-14:37:55.105 16dc Delete type=3 #46
+2023/11/23-20:00:40.977 c7c Recovering log #90
+2023/11/23-20:00:41.025 c7c Delete type=0 #90
+2023/11/23-20:00:41.025 c7c Delete type=3 #88
