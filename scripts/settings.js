@@ -33,5 +33,13 @@ export const lightSourceHandlingSettings = [
             restricted: true,
             default: "#f98026",
             scope: "world"}
+    }, {
+        settingName: "lightAlpha",
+        settingObject: { name: "Player Light Source Intensity",
+            config: true,
+            type: Number,
+            restricted: true,
+            default: 3,
+            scope: "world"}
     }
 ]

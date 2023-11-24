@@ -132,6 +132,7 @@ export default class LightSourceHandler {
                 let strongestEffect = this.getEffect(token, lightInfo)
                 if (strongestEffect == undefined) continue
                 lightInfo.data.light.color = game.settings.get("inchryptians-easy-lightsource-handling", "lightColor")
+                lightInfo.data.light.alpha = game.settings.get("inchryptians-easy-lightsource-handling", "lightAlpha")
                 token.document.update(lightInfo.data)
                 return
             }
