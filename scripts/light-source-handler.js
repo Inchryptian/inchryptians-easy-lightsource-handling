@@ -5,11 +5,11 @@ import { createButton } from "./helpers/buttons.js"
 export default class LightSourceHandler {
 
     static useDdbItems() {
-        if(game.packs.get("world.ddb-data-hub-items") == undefined) return false
+        if (game.packs.get("world.ddb-data-hub-items") == undefined) return false
         return game.settings.get("inchryptians-easy-lightsource-handling", "ddbItems")
     }
 
-    static adminMode(){
+    static adminMode() {
         return game.settings.get("inchryptians-easy-lightsource-handling", "adminMode") && game.user.isGM
     }
 
@@ -18,7 +18,7 @@ export default class LightSourceHandler {
     }
 
     static lightLightSource(token, lightInfos) {
-        if(this.adminMode()) return
+        if (this.adminMode()) return
         let lightSources = token.actor.items.find(item => item.name == lightInfos[this.useDdbItems() ? "ddbItemName" : "itemName"])
         if (lightSources == undefined) return NO_LIGHT_SOURCES
         if (lightSources.quantity < 1) return NO_LIGHT_SOURCES
@@ -33,7 +33,7 @@ export default class LightSourceHandler {
         protoToken.x = token.center.x;
         protoToken.y = token.center.y;
         canvas.scene.createEmbeddedDocuments("Token", [protoToken])
-        if (this.adminMode()) return 
+        if (this.adminMode()) return
         if (lightInfos.fuel != undefined) {
             let lightSourceItem = token.actor.items.find(e => e.name == lightInfos[this.useDdbItems() ? "ddbItemName" : "itemName"])
             lightSourceItem.update({ data: { quantity: lightSourceItem.system.quantity - 1 } })
@@ -59,7 +59,6 @@ export default class LightSourceHandler {
         if (!(xVal <= distance && xVal >= -distance)) return false
         let yVal = lightSource.y - token.y
         if (!(yVal <= distance && yVal >= -distance)) return false
-        console.log("LIGHT CLOSE")
         return true
     }
 
@@ -73,11 +72,11 @@ export default class LightSourceHandler {
             return
         }
 
-        allLightSources = canvas.effects.lightSources.filter(filteringLightSource => { 
-            if(filteringLightSource.object == null) return
+        allLightSources = canvas.effects.lightSources.filter(filteringLightSource => {
+            if (filteringLightSource.object == null) return
             const lightSourceDocument = filteringLightSource.object.document
-            if("light" in lightSourceDocument) return lightSourceDocument.light.dim == lightInfos.data.light.dim
-            if("config" in lightSourceDocument) return lightSourceDocument.config.dim == lightInfos.data.light.dim
+            if ("light" in lightSourceDocument) return lightSourceDocument.light.dim == lightInfos.data.light.dim
+            if ("config" in lightSourceDocument) return lightSourceDocument.config.dim == lightInfos.data.light.dim
         })
 
         for (let lightSource of allLightSources) {
@@ -110,7 +109,7 @@ export default class LightSourceHandler {
         let buttonForLighting = createButton(`Neue ${lightInfos.germanName} anzünden`, () => {
             ui.notifications.info(`${lightInfos.germanName} angezündet`)
             this.handleLightEffectAndChangeLight(token, lightInfos)
-            if (this.adminMode()) return 
+            if (this.adminMode()) return
             if (lightInfos.fuel) {
                 let lightSourceFuel = token.actor.items.find(item => item.name == lightInfos[this.useDdbItems() ? "ddbFuel" : "fuel"])
                 lightSourceFuel.update({ data: { quantity: lightSourceFuel.system.quantity - 1 } })
@@ -131,7 +130,9 @@ export default class LightSourceHandler {
             for (let lightInfo of LIGHT_INFO_ORDER) {
                 let strongestEffect = this.getEffect(token, lightInfo)
                 if (strongestEffect == undefined) continue
-                lightInfo.data.light.color = game.settings.get("inchryptians-easy-lightsource-handling", "lightColor")
+                if (!(lightInfo.buttonName == "light")) {
+                    lightInfo.data.light.color = game.settings.get("inchryptians-easy-lightsource-handling", "lightColor")
+                }
                 lightInfo.data.light.alpha = game.settings.get("inchryptians-easy-lightsource-handling", "lightAlpha")
                 token.document.update(lightInfo.data)
                 return
@@ -190,7 +191,7 @@ export default class LightSourceHandler {
         let effect = this.getEffect(token, spellInfos)
         if (token.actor.items.find(e => e.name == "Light") == undefined && !effect && !this.adminMode()) return mainMenuButtons
 
-        let lightSpellButton = createButton( spellInfos.germanName, () => this.handleLightSpell(token, spellInfos, effect), effect != undefined)
+        let lightSpellButton = createButton(spellInfos.germanName, () => this.handleLightSpell(token, spellInfos, effect), effect != undefined)
         mainMenuButtons[`handle${spellInfos.buttonName}Button`] = lightSpellButton
         return mainMenuButtons
     }
@@ -211,10 +212,10 @@ export default class LightSourceHandler {
                             let spelldata = spellInfos.data
                             spelldata.light.color = $("input[data-edit='pickColorForLightSpell']").val()
                             let userTargets = game.user.targets
-                            if(userTargets.size > 0 ){
-                                return askForLight( {
+                            if (userTargets.size > 0) {
+                                return askForLight({
                                     userTargets: userTargets.ids,
-                                    lightInfos: spellInfos 
+                                    lightInfos: spellInfos
                                 })
                             }
                             this.handleLightEffectAndChangeLight(token, spellInfos)
