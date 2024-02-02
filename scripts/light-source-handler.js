@@ -132,6 +132,8 @@ export default class LightSourceHandler {
                 if (strongestEffect == undefined) continue
                 if (!(lightInfo.buttonName == "light")) {
                     lightInfo.data.light.color = game.settings.get("inchryptians-easy-lightsource-handling", "lightColor")
+                } else {
+                    lightInfo.data.light.color = lightInfos.data.light.color
                 }
                 lightInfo.data.light.alpha = game.settings.get("inchryptians-easy-lightsource-handling", "lightAlpha")
                 token.document.update(lightInfo.data)
