@@ -10,8 +10,8 @@ export const TORCH_INFOS = {
     buttonName: "torch",
     effect: {
         id: "Torch",
-        label: "Torch",
-        icon: "icons/sundries/lights/torch-brown-lit.webp"
+        name: "Torch",
+        icon: "icons/sundries/lights/torch-brown-lit.webp" //might get renamed to img
     },
     data: light({ animation: { type: "torch", "speed": 3, "intensity": 2 } })
 }
@@ -24,7 +24,7 @@ export const CANDLE_INFOS = {
     buttonName: "candle",
     effect: {
         id: "Candle",
-        label: "Candle",
+        name: "Candle",
         icon: "icons/sundries/lights/candle-unlit-tan.webp"
     },
     data: light({ dim: 10, bright: 5, alpha: 0.15 })
@@ -38,7 +38,7 @@ export const LAMP_INFOS = {
     buttonName: "lamp",
     effect: {
         id: "Lamp",
-        label: "Lamp",
+        name: "Lamp",
         icon: "https://assets.forge-vtt.com/bazaar/systems/dnd5e/assets/icons/items/inventory/lamp.jpg"
     },
     data: light({ dim: 20, bright: 10, alpha: 0.25 }),
@@ -54,7 +54,7 @@ export const BULLSEYE_INFOS = {
     buttonName: "bullseyeLantern",
     effect: {
         id: "Bullseye",
-        label: "Bullseye",
+        name: "Bullseye",
         icon: "icons/sundries/lights/lantern-bullseye-signal-copper.webp"
     },
     data: light({ dim: 120, bright: 60, angle: 60, alpha: 0.3 }),
@@ -70,7 +70,7 @@ export const HOODED_LANTERN_CLOSED_INFOS = {
     buttonName: "hoodedLanternClosed",
     effect: {
         id: "Hooded Lantern",
-        label: "Hooded Lantern",
+        name: "Hooded Lantern",
         icon: "icons/sundries/lights/lantern-iron-yellow.webp"
     },
     data: light({ dim: 5, bright: 0, alpha: 0.2 }),
@@ -86,7 +86,7 @@ export const HOODED_LANTERN_OPEN_INFOS = {
     buttonName: "hoodedLanternOpen",
     effect: {
         id: "Lantern",
-        label: "Lantern",
+        name: "Lantern",
         icon: "icons/sundries/lights/lantern-iron-yellow.webp"
     },
     data: light({ dim: 60, bright: 30 }),
@@ -99,7 +99,7 @@ export const LIGHT_SPELL_INFOS = {
     buttonName: "light",
     effect: {
         id: "Light",
-        label: "Light",
+        name: "Light",
         icon: "icons/magic/light/explosion-star-small-blue-yellow.webp"
     },
     data: light()
