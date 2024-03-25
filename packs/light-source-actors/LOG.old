@@ -1,7 +1,9 @@
-2024/02/01-21:30:09.939 f84 Recovering log #106
-2024/02/01-21:30:09.986 f84 Delete type=0 #106
-2024/02/01-21:30:09.986 f84 Delete type=3 #104
-2024/02/01-23:01:30.768 5664 Level-0 table #111: started
-2024/02/01-23:01:30.768 5664 Level-0 table #111: 0 bytes OK
-2024/02/01-23:01:30.793 5664 Delete type=0 #109
-2024/02/01-23:01:30.794 5664 Manual compaction at level-0 from '!actors!0ahsBmQ8wGcd6HV9' @ 72057594037927935 : 1 .. '!actors!luZ6UNwkssGCdt4W' @ 0 : 0; will stop at (end)
+2024/03/25-09:11:27.434 504 Log #113: 0 ops saved to Table #130 OK
+2024/03/25-09:11:27.434 504 Archiving E:\FoundryV11\data\Data\modules\inchryptians-easy-lightsource-handling\packs\light-source-actors/000113.log: OK
+2024/03/25-09:11:27.434 504 Log #129: 0 ops saved to Table #131 OK
+2024/03/25-09:11:27.434 504 Archiving E:\FoundryV11\data\Data\modules\inchryptians-easy-lightsource-handling\packs\light-source-actors/000129.log: OK
+2024/03/25-09:11:27.435 504 Table #53: 6 entries OK
+2024/03/25-09:11:27.435 504 Table #121: 6 entries OK
+2024/03/25-09:11:27.472 504 Archiving E:\FoundryV11\data\Data\modules\inchryptians-easy-lightsource-handling\packs\light-source-actors/MANIFEST-000112: OK
+2024/03/25-09:11:27.472 504 Archiving E:\FoundryV11\data\Data\modules\inchryptians-easy-lightsource-handling\packs\light-source-actors/MANIFEST-000128: OK
+2024/03/25-09:11:27.505 504 **** Repaired leveldb E:\FoundryV11\data\Data\modules\inchryptians-easy-lightsource-handling\packs\light-source-actors; recovered 2 files; 26426 bytes. Some data may have been lost. ****
