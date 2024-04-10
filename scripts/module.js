@@ -21,6 +21,6 @@ Hooks.on("init", () => {
     }
     for(let lightInfo of LIGHT_INFO_ORDER) {
         console.log(lightInfo)
-        CONFIG.statusEffects.push(lightInfo.effect)
+        console.log(CONFIG.statusEffects.push(lightInfo.effect))
     }
 })

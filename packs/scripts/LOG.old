@@ -1,9 +1,14 @@
-2024/03/25-09:11:27.553 4830 Log #114: 0 ops saved to Table #131 OK
-2024/03/25-09:11:27.553 4830 Archiving E:\FoundryV11\data\Data\modules\inchryptians-easy-lightsource-handling\packs\scripts/000114.log: OK
-2024/03/25-09:11:27.553 4830 Log #130: 0 ops saved to Table #132 OK
-2024/03/25-09:11:27.553 4830 Archiving E:\FoundryV11\data\Data\modules\inchryptians-easy-lightsource-handling\packs\scripts/000130.log: OK
-2024/03/25-09:11:27.553 4830 Table #54: 2 entries OK
-2024/03/25-09:11:27.553 4830 Table #122: 2 entries OK
-2024/03/25-09:11:27.580 4830 Archiving E:\FoundryV11\data\Data\modules\inchryptians-easy-lightsource-handling\packs\scripts/MANIFEST-000113: OK
-2024/03/25-09:11:27.580 4830 Archiving E:\FoundryV11\data\Data\modules\inchryptians-easy-lightsource-handling\packs\scripts/MANIFEST-000129: OK
-2024/03/25-09:11:27.611 4830 **** Repaired leveldb E:\FoundryV11\data\Data\modules\inchryptians-easy-lightsource-handling\packs\scripts; recovered 2 files; 4550 bytes. Some data may have been lost. ****
+2024/04/10-10:19:50.699 22d4 Recovering log #136
+2024/04/10-10:19:50.777 22d4 Delete type=0 #136
+2024/04/10-10:19:50.777 22d4 Delete type=3 #135
+2024/04/10-10:39:38.202 3204 Level-0 table #140: started
+2024/04/10-10:39:38.202 3204 Level-0 table #140: 0 bytes OK
+2024/04/10-10:39:38.290 3204 Delete type=0 #138
+2024/04/10-10:39:38.336 3204 Manual compaction at level-0 from '!macros!LKDtQE1yGXFziwLp' @ 72057594037927935 : 1 .. '!macros!Zx4JN3IFE8gVeBbs' @ 0 : 0; will stop at '!macros!Zx4JN3IFE8gVeBbs' @ 6 : 1
+2024/04/10-10:39:38.336 3204 Compacting 2@0 + 0@1 files
+2024/04/10-10:39:38.361 3204 Generated table #141@0: 2 keys, 2275 bytes
+2024/04/10-10:39:38.361 3204 Compacted 2@0 + 0@1 files => 2275 bytes
+2024/04/10-10:39:38.385 3204 compacted to: files[ 0 1 0 0 0 0 0 ]
+2024/04/10-10:39:38.385 3204 Delete type=2 #54
+2024/04/10-10:39:38.385 3204 Delete type=2 #122
+2024/04/10-10:39:38.429 3204 Manual compaction at level-0 from '!macros!Zx4JN3IFE8gVeBbs' @ 6 : 1 .. '!macros!Zx4JN3IFE8gVeBbs' @ 0 : 0; will stop at (end)

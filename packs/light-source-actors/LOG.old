@@ -1,9 +1,14 @@
-2024/03/25-09:11:27.434 504 Log #113: 0 ops saved to Table #130 OK
-2024/03/25-09:11:27.434 504 Archiving E:\FoundryV11\data\Data\modules\inchryptians-easy-lightsource-handling\packs\light-source-actors/000113.log: OK
-2024/03/25-09:11:27.434 504 Log #129: 0 ops saved to Table #131 OK
-2024/03/25-09:11:27.434 504 Archiving E:\FoundryV11\data\Data\modules\inchryptians-easy-lightsource-handling\packs\light-source-actors/000129.log: OK
-2024/03/25-09:11:27.435 504 Table #53: 6 entries OK
-2024/03/25-09:11:27.435 504 Table #121: 6 entries OK
-2024/03/25-09:11:27.472 504 Archiving E:\FoundryV11\data\Data\modules\inchryptians-easy-lightsource-handling\packs\light-source-actors/MANIFEST-000112: OK
-2024/03/25-09:11:27.472 504 Archiving E:\FoundryV11\data\Data\modules\inchryptians-easy-lightsource-handling\packs\light-source-actors/MANIFEST-000128: OK
-2024/03/25-09:11:27.505 504 **** Repaired leveldb E:\FoundryV11\data\Data\modules\inchryptians-easy-lightsource-handling\packs\light-source-actors; recovered 2 files; 26426 bytes. Some data may have been lost. ****
+2024/04/10-10:19:50.641 3a90 Recovering log #135
+2024/04/10-10:19:50.695 3a90 Delete type=0 #135
+2024/04/10-10:19:50.695 3a90 Delete type=3 #134
+2024/04/10-10:39:38.093 3204 Level-0 table #139: started
+2024/04/10-10:39:38.093 3204 Level-0 table #139: 0 bytes OK
+2024/04/10-10:39:38.110 3204 Delete type=0 #137
+2024/04/10-10:39:38.110 3204 Manual compaction at level-0 from '!actors!0ahsBmQ8wGcd6HV9' @ 72057594037927935 : 1 .. '!actors!luZ6UNwkssGCdt4W' @ 0 : 0; will stop at '!actors!luZ6UNwkssGCdt4W' @ 14 : 1
+2024/04/10-10:39:38.110 3204 Compacting 2@0 + 0@1 files
+2024/04/10-10:39:38.177 3204 Generated table #140@0: 6 keys, 13213 bytes
+2024/04/10-10:39:38.177 3204 Compacted 2@0 + 0@1 files => 13213 bytes
+2024/04/10-10:39:38.201 3204 compacted to: files[ 0 1 0 0 0 0 0 ]
+2024/04/10-10:39:38.202 3204 Delete type=2 #53
+2024/04/10-10:39:38.202 3204 Delete type=2 #121
+2024/04/10-10:39:38.312 3204 Manual compaction at level-0 from '!actors!luZ6UNwkssGCdt4W' @ 14 : 1 .. '!actors!luZ6UNwkssGCdt4W' @ 0 : 0; will stop at (end)
