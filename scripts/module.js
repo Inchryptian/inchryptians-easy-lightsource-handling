@@ -19,6 +19,9 @@ Hooks.on("init", () => {
     for (let setting of lightSourceHandlingSettings) {
         game.settings.register("inchryptians-easy-lightsource-handling", setting.settingName, setting.settingObject)
     }
+})
+
+Hooks.on("ready", () => {
     for(let lightInfo of LIGHT_INFO_ORDER) {
         console.log(lightInfo)
         console.log(CONFIG.statusEffects.push(lightInfo.effect))
