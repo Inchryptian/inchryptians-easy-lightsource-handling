@@ -39,7 +39,7 @@ export const lightSourceHandlingSettings = [
             config: true,
             type: Number,
             restricted: true,
-            default: 3,
+            default: 0.3,
             scope: "world"}
     }
 ]
