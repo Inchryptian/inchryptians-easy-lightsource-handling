@@ -3,8 +3,8 @@
   "description": "A simple module created to handle lightsources more easy",
   "version": "0.1.26",
   "compatibility": {
-    "minimum": "11",
-    "verified": "11"
+    "minimum": "12",
+    "verified": "12"
   },
   "esmodules": [
     "scripts/lightSourceHandler.js",
@@ -33,8 +33,8 @@
   ],
   "socket": true,
   "url": "https://github.com/Inchryptian/inchryptians-easy-lightsource-handling/",
-  "manifest": "https://raw.githubusercontent.com/Inchryptian/inchryptians-easy-lightsource-handling/version_11_DnD_3_0_0/module.json",
-  "download": "https://codeload.github.com/Inchryptian/inchryptians-easy-lightsource-handling/zip/version_11_DnD_3_0_0",
+  "manifest": "https://raw.githubusercontent.com/Inchryptian/inchryptians-easy-lightsource-handling/v12/module.json",
+  "download": "https://codeload.github.com/Inchryptian/inchryptians-easy-lightsource-handling/zip/v12",
   "id": "inchryptians-easy-lightsource-handling",
   "relationships": {
     "requires": [

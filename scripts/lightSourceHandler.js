@@ -55,8 +55,7 @@ export async function handleLightEffectAndChangeLight(token, lightInfos) {
         token.document.update(lightInfo.data)
         return
     }
-    token.document.update({ light: { dim: 0, bright: 0 } })
-
+    await token.document.update({ light: { dim: 0, bright: 0 } })
 }
 
 export function handleLightItem(token, buttons, lightInfos) {
