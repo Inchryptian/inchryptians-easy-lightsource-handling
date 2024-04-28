@@ -1,3 +1,7 @@
+import { NO_LIGHT_SOURCES_AVAILABLE_OR_CLOSE, NO_LIGHT_SOURCES } from "../constants.js"
+import { handleLightEffectAndChangeLight, activateLightSource } from "../lightSourceHandler.js"
+import { useDdbItems, adminMode, checkIfLightItemIsClose } from "./checks.js"
+
 export function createLightButton() {
     let button = document.createElement('div')
 
@@ -15,4 +19,41 @@ export function createButton(label, callbackFunction, active = true) {
         callback: callbackFunction,
         icon: `<i class="fas fa-${active ? "check" : "times"}"></i>`
     }
+}
+
+export function createLightSourceButtonObjects(token, lightInfos) {
+    let buttonForPickup = createButton(`${lightInfos.germanName} aufheben`, () => {
+        ui.notifications.info(`${lightInfos.germanName} aufgehoben`)
+        handleLightEffectAndChangeLight(token, lightInfos)
+        if (adminMode()) return
+        if (lightInfos.fuel != undefined) {
+            let lightSourceItem = token.actor.items.find(item => item.name == lightInfos[useDdbItems() ? "ddbItemName" : "itemName"])
+            if (lightSourceItem != undefined) {
+                lightSourceItem.update({ data: { quantity: lightSourceItem.system.quantity + 1 } })
+            } else {
+                let compendiumItems = game.packs.get(useDdbItems() ? "world.ddb-data-hub-items" : "dnd5e.items")
+                let lightSourceItemId = compendiumItems.index.find(item => item.name == lightInfos[useDdbItems() ? "ddbItemName" : "itemName"])._id
+                compendiumItems.getDocument(lightSourceItemId)
+                    .then(item => { token.actor.createEmbeddedDocuments("Item", [item]) })
+            }
+        }
+    })
+
+    let buttonForLighting = createButton(`Neue ${lightInfos.germanName} anzünden`, () => {
+        ui.notifications.info(`${lightInfos.germanName} angezündet`)
+        handleLightEffectAndChangeLight(token, lightInfos)
+        if (adminMode()) return
+        if (lightInfos.fuel) {
+            let lightSourceFuel = token.actor.items.find(item => item.name == lightInfos[useDdbItems() ? "ddbFuel" : "fuel"])
+            lightSourceFuel.update({ data: { quantity: lightSourceFuel.system.quantity - 1 } })
+        } else {
+            let lightSourceItem = token.actor.items.find(item => item.name == lightInfos[useDdbItems() ? "ddbItemName" : "itemName"])
+            lightSourceItem.update({ data: { quantity: lightSourceItem.system.quantity - 1 } })
+        }
+    })
+
+    let buttons = {}
+    if (checkIfLightItemIsClose(token, lightInfos) != NO_LIGHT_SOURCES_AVAILABLE_OR_CLOSE) buttons.pickupButton = buttonForPickup
+    if (activateLightSource(token, lightInfos) != NO_LIGHT_SOURCES) buttons.lightingButton = buttonForLighting
+    return buttons
 }

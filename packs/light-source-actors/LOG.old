@@ -1,14 +1,5 @@
-2024/04/10-10:19:50.641 3a90 Recovering log #135
-2024/04/10-10:19:50.695 3a90 Delete type=0 #135
-2024/04/10-10:19:50.695 3a90 Delete type=3 #134
-2024/04/10-10:39:38.093 3204 Level-0 table #139: started
-2024/04/10-10:39:38.093 3204 Level-0 table #139: 0 bytes OK
-2024/04/10-10:39:38.110 3204 Delete type=0 #137
-2024/04/10-10:39:38.110 3204 Manual compaction at level-0 from '!actors!0ahsBmQ8wGcd6HV9' @ 72057594037927935 : 1 .. '!actors!luZ6UNwkssGCdt4W' @ 0 : 0; will stop at '!actors!luZ6UNwkssGCdt4W' @ 14 : 1
-2024/04/10-10:39:38.110 3204 Compacting 2@0 + 0@1 files
-2024/04/10-10:39:38.177 3204 Generated table #140@0: 6 keys, 13213 bytes
-2024/04/10-10:39:38.177 3204 Compacted 2@0 + 0@1 files => 13213 bytes
-2024/04/10-10:39:38.201 3204 compacted to: files[ 0 1 0 0 0 0 0 ]
-2024/04/10-10:39:38.202 3204 Delete type=2 #53
-2024/04/10-10:39:38.202 3204 Delete type=2 #121
-2024/04/10-10:39:38.312 3204 Manual compaction at level-0 from '!actors!luZ6UNwkssGCdt4W' @ 14 : 1 .. '!actors!luZ6UNwkssGCdt4W' @ 0 : 0; will stop at (end)
+2024/04/28-13:27:10.053 fec Recovering log #147
+2024/04/28-13:27:10.053 fec Level-0 table #149: started
+2024/04/28-13:27:10.089 fec Level-0 table #149: 14325 bytes OK
+2024/04/28-13:27:10.142 fec Delete type=0 #147
+2024/04/28-13:27:10.142 fec Delete type=3 #145

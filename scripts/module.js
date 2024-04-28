@@ -1,21 +1,21 @@
 import { createLightButton } from "./helpers/buttons.js"
 import { lightSourceHandlingSettings } from "./settings.js"
 import { LIGHT_INFO_ORDER } from "./constants.js"
-import LightSourceHandler from "./light-source-handler.js"
+import { createMainDialog } from "./helpers/dialogs.js"
 
 Hooks.on('renderTokenHUD', (hud, html) => {
     
     const lightButton = createLightButton();
 
     lightButton.on('click', () => {
-        LightSourceHandler.startInchryptianScript(hud.object)
+        createMainDialog(hud.object)
     })
 
     html.children('.left').append(lightButton)
 })
 
 Hooks.on("init", () => {
-    window.LightSourceHandler = LightSourceHandler
+    window.createMainDialogForInchryptianModule = createMainDialog
     for (let setting of lightSourceHandlingSettings) {
         game.settings.register("inchryptians-easy-lightsource-handling", setting.settingName, setting.settingObject)
     }
@@ -23,7 +23,6 @@ Hooks.on("init", () => {
 
 Hooks.on("ready", () => {
     for(let lightInfo of LIGHT_INFO_ORDER) {
-        console.log(lightInfo)
-        console.log(CONFIG.statusEffects.push(lightInfo.effect))
+        CONFIG.statusEffects.push(lightInfo.effect)
     }
 })

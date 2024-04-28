@@ -7,7 +7,7 @@
     "verified": "11"
   },
   "esmodules": [
-    "scripts/light-source-handler.js",
+    "scripts/lightSourceHandler.js",
     "scripts/module.js"
   ],
   "authors": [
