@@ -1,11 +1,7 @@
 import { NO_LIGHT_SOURCES_AVAILABLE_OR_CLOSE } from "../constants.js"
 
-function checkDistance(token, lightSource, distance) {
-    let xVal = lightSource.x - token.x
-    if (!(xVal <= distance && xVal >= -distance)) return false
-    let yVal = lightSource.y - token.y
-    if (!(yVal <= distance && yVal >= -distance)) return false
-    return true
+function inReach(token, lightSource, distance) {
+    return !(canvas.grid.measureDistance(token, lightSource) > distance)
 }
 
 export function useDdbItems() {
@@ -22,7 +18,7 @@ export function checkIfLightItemIsClose(token, lightInfos) {
     for (let lightSource of allLightSources) {
         if (lightSource.actor == null) continue
         if (lightInfos.droppedItemName != lightSource.actor.name) continue
-        if (!checkDistance(token, lightSource, 150)) continue
+        if (!inReach(token, lightSource, 10)) continue
         return lightSource
     }
 
@@ -36,7 +32,7 @@ export function checkIfLightItemIsClose(token, lightInfos) {
     
     for (let lightSource of allLightSources) {
         if (lightSource.actor != undefined) continue
-        if (!checkDistance(token, lightSource, 150)) continue
+        if (!inReach(token, lightSource, 10)) continue
         return lightSource
     }
     return NO_LIGHT_SOURCES_AVAILABLE_OR_CLOSE

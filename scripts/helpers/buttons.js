@@ -29,7 +29,7 @@ export function createLightSourceButtonObjects(token, lightInfos) {
         buttons.pickupButton = createButton(`${lightInfos.germanName} aufheben`, () => {
             ui.notifications.info(`${lightInfos.germanName} aufgehoben`)
             handleLightEffectAndChangeLight(token, lightInfos)
-            deleteLight(closeLightItem)
+            if (closeLightItem.sourceId.includes("Token")) deleteLight(closeLightItem)
             if (adminMode()) return
             if (lightInfos.fuel != undefined) {
                 let lightSourceItem = token.actor.items.find(item => item.name == lightInfos[useDdbItems() ? "ddbItemName" : "itemName"])
