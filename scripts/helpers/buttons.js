@@ -54,7 +54,6 @@ export function createLightSourceButtonObjects(token, lightInfos) {
             lightSourceFuel.update({ system: { quantity: lightSourceFuel.system.quantity - 1 } })
         } else {
             let lightSourceItem = token.actor.items.find(item => item.name == lightInfos[useDdbItems() ? "ddbItemName" : "itemName"])
-            console.log(lightSourceItem)
             lightSourceItem.update({ system: { quantity: lightSourceItem.system.quantity - 1 } })
         }
     })

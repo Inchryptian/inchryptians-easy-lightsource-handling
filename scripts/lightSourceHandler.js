@@ -1,4 +1,4 @@
-import { LIGHT_INFO_ORDER, NO_LIGHT_SOURCES, NO_LIGHT_SOURCES_AVAILABLE_OR_CLOSE } from "./constants.js"
+import { LIGHT_INFO_ORDER, NO_LIGHT_SOURCES } from "./constants.js"
 import { useDdbItems, adminMode } from "./helpers/checks.js"
 import { extinguishOrDropLightItemDialog, createDialogForLightSpell } from "./helpers/dialogs.js"
 
@@ -21,12 +21,10 @@ export function getEffect(token, lightInfo) {
 export function activateLightSource(token, lightInfos) {
     if (adminMode()) return
     let lightSources = token.actor.items.find( item => item.name == lightInfos[useDdbItems() ? "ddbItemName" : "itemName"])
-    console.log(lightSources)
     if (lightSources == undefined) return NO_LIGHT_SOURCES
     if (lightSources.system.quantity < 1) return NO_LIGHT_SOURCES
     if (lightInfos.fuel == undefined) return
     let fuelItem = token.actor.items.find( item => item.name == lightInfos[useDdbItems() ? "ddbFuel" : "fuel"])
-    console.log(fuelItem)
     if (fuelItem == undefined) return NO_LIGHT_SOURCES
     if (fuelItem.system.quantity < 1) return NO_LIGHT_SOURCES
 }
