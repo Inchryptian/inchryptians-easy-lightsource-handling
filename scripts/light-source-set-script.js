@@ -1,12 +1,13 @@
 let mousePosition = canvas.mousePosition
 let lightColor = "#f98026"
 
-new Dialog({
-    title: "Lichtquelle auswählen",
-    buttons: {
+new foundry.applications.api.dialog({
+    window: { title: "Lichtquelle auswählen"},
+    buttons: [
         //von hier kopieren
-        candle: {
+        {
             label: "Candle",
+            action: "Candle",
             callback: () => {
                 canvas.scene.createEmbeddedDocuments("AmbientLight", [{
                     t: "l", // l for local. The other option is g for global.
@@ -27,8 +28,9 @@ new Dialog({
             }
         },
         //bis hier kopieren
-        lamp: {
+        {
             label: "Lamp",
+            action: "Lamp",
             callback: () => {
                 canvas.scene.createEmbeddedDocuments("AmbientLight", [{
                     t: "l", // l for local. The other option is g for global.
@@ -48,8 +50,9 @@ new Dialog({
                 ])
             }
         },
-        torch: {
+        {
             label: "Torch",
+            action: "Torch",
             callback: () => {
                 canvas.scene.createEmbeddedDocuments("AmbientLight", [{
                     t: "l", // l for local. The other option is g for global.
@@ -69,8 +72,9 @@ new Dialog({
                 ])
             }
         },
-        hoodedLantern: {
+        {
             label: "Hooded",
+            action: "Hooded",
             callback: () => {
                 canvas.scene.createEmbeddedDocuments("AmbientLight", [{
                     t: "l", // l for local. The other option is g for global.
@@ -90,8 +94,9 @@ new Dialog({
                 ])
             }
         },
-        lantern: {
+        {
             label: "Lantern",
+            action: "Lantern",
             callback: () => {
                 canvas.scene.createEmbeddedDocuments("AmbientLight", [{
                     t: "l", // l for local. The other option is g for global.
@@ -111,8 +116,9 @@ new Dialog({
                 ])
             }
         },
-        bullseyeLantern: {
+        {
             label: "Bullseye",
+            action: "Bullseye",
             callback: () => {
                 canvas.scene.createEmbeddedDocuments("AmbientLight", [{
                     t: "l", // l for local. The other option is g for global.
@@ -132,8 +138,9 @@ new Dialog({
                 ])
             }
         },
-        daylight: {
+        {
             label: "Daylight",
+            action: "Daylight",
             callback: () => {
                 canvas.scene.createEmbeddedDocuments("AmbientLight", [{
                     x: mousePosition.x,
@@ -147,5 +154,5 @@ new Dialog({
                 ])
             }
         }
-    }
+    ]
 }).render(true);

@@ -14,12 +14,13 @@ export function createLightButton() {
     return $(button)
 }
 
-export function createButton(label, callbackFunction, active = true) {
+export function createButton(label, callbackFunction, active = true, picture = null) {
+    const printLabel = (picture == null) ? label : `${label} <img src='${picture}' style="border:0;width:35px;height:35px;vertical-align:middle">`
     return {
-        label: label,
+        label: printLabel,
         action: label,
         callback: callbackFunction,
-        icon: [active ? "fas fa-check" : "fas fa-times"]//`<i class="fas fa-${active ? "check" : "times"}"></i>`
+        icon: [active ? "fas fa-check" : "fas fa-times"]
     }
 }
 
@@ -27,7 +28,7 @@ export function createLightSourceButtonObjects(token, lightInfos) {
     let buttons = []
     const closeLightItem = checkIfLightItemIsClose(token, lightInfos)
     if ( closeLightItem != NO_LIGHT_SOURCES_AVAILABLE_OR_CLOSE){
-        buttons.push( createButton(`${lightInfos.germanName} aufheben`, () => {
+        buttons.push(createButton(`${lightInfos.germanName} aufheben`, () => {
             ui.notifications.info(`${lightInfos.germanName} aufgehoben`)
             handleLightEffectAndChangeLight(token, lightInfos)
             if (closeLightItem.sourceId.includes("Token")) deleteLight(closeLightItem)
@@ -37,7 +38,7 @@ export function createLightSourceButtonObjects(token, lightInfos) {
             }
         }))
     }
-
+    
     let buttonForLighting = createButton(`Neue ${lightInfos.germanName} anzünden`, () => {
         ui.notifications.info(`${lightInfos.germanName} angezündet`)
         handleLightEffectAndChangeLight(token, lightInfos)

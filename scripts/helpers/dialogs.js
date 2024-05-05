@@ -73,14 +73,14 @@ export function createDialogForLightSpell(token, spellInfos){
                 }
                 handleLightEffectAndChangeLight(token, spellInfos)
             },
-            icon: `<i class="fas fa-check"></i>`
+            icon: ["fas fa-check"]
         }],
     }).render(true)
 }
 
 function addItemButtonsToMenu(mainMenuButtons, token, lightInfos) {
     let lightItemButtons = createLightSourceButtonObjects(token, lightInfos)
-    let handleLightItemButton = createButton(lightInfos.germanName, () => handleLightItem(token, lightItemButtons, lightInfos), getEffect(token, lightInfos) != undefined)
+    let handleLightItemButton = createButton(lightInfos.germanName, () => handleLightItem(token, lightItemButtons, lightInfos), getEffect(token, lightInfos) != undefined, lightInfos.effect.img)
     if (Object.keys(lightItemButtons).length > 0 || getEffect(token, lightInfos)) mainMenuButtons.push(handleLightItemButton)
     return mainMenuButtons
 }
@@ -89,7 +89,7 @@ function addSpellButtonToMenu(mainMenuButtons, token, spellInfos) {
     let effect = getEffect(token, spellInfos)
     if (token.actor.items.find(e => e.name == "Light") == undefined && !effect && !adminMode()) return mainMenuButtons
 
-    let lightSpellButton = createButton(spellInfos.germanName, () => handleLightSpell(token, spellInfos, effect), effect != undefined)
+    let lightSpellButton = createButton(spellInfos.germanName, () => handleLightSpell(token, spellInfos, effect), effect != undefined, spellInfos.effect.img)
     mainMenuButtons.push(lightSpellButton)
     return mainMenuButtons
 }
