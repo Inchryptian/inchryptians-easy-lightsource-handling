@@ -37,6 +37,3 @@ function askOtherPlayerForLight(request){
 function deleteLightGM(closeLightItemTokenId){
     canvas.tokens.get(closeLightItemTokenId).document.delete()
 }
-
-
-

@@ -11,7 +11,7 @@ export const TORCH_INFOS = {
     effect: {
         id: "Torch",
         name: "Torch",
-        img: "icons/sundries/lights/torch-brown-lit.webp" //might get renamed to img
+        img: "icons/sundries/lights/torch-brown-lit.webp" 
     },
     data: light({ animation: { type: "torch", "speed": 3, "intensity": 2 } })
 }

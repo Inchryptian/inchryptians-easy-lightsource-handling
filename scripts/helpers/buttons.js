@@ -34,7 +34,7 @@ export function createLightSourceButtonObjects(token, lightInfos) {
             if (lightInfos.fuel != undefined) {
                 let lightSourceItem = token.actor.items.find(item => item.name == lightInfos[useDdbItems() ? "ddbItemName" : "itemName"])
                 if (lightSourceItem != undefined) {
-                    lightSourceItem.update({ data: { quantity: lightSourceItem.system.quantity + 1 } })
+                    lightSourceItem.update({ system: { quantity: lightSourceItem.system.quantity + 1 } })
                 } else {
                     let compendiumItems = game.packs.get(useDdbItems() ? "world.ddb-data-hub-items" : "dnd5e.items")
                     let lightSourceItemId = compendiumItems.index.find(item => item.name == lightInfos[useDdbItems() ? "ddbItemName" : "itemName"])._id
@@ -51,10 +51,11 @@ export function createLightSourceButtonObjects(token, lightInfos) {
         if (adminMode()) return
         if (lightInfos.fuel) {
             let lightSourceFuel = token.actor.items.find(item => item.name == lightInfos[useDdbItems() ? "ddbFuel" : "fuel"])
-            lightSourceFuel.update({ data: { quantity: lightSourceFuel.system.quantity - 1 } })
+            lightSourceFuel.update({ system: { quantity: lightSourceFuel.system.quantity - 1 } })
         } else {
             let lightSourceItem = token.actor.items.find(item => item.name == lightInfos[useDdbItems() ? "ddbItemName" : "itemName"])
-            lightSourceItem.update({ data: { quantity: lightSourceItem.system.quantity - 1 } })
+            console.log(lightSourceItem)
+            lightSourceItem.update({ system: { quantity: lightSourceItem.system.quantity - 1 } })
         }
     })
     

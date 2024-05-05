@@ -2,15 +2,15 @@ import { LIGHT_INFO_ORDER, NO_LIGHT_SOURCES, NO_LIGHT_SOURCES_AVAILABLE_OR_CLOSE
 import { useDdbItems, adminMode } from "./helpers/checks.js"
 import { extinguishOrDropLightItemDialog, createDialogForLightSpell } from "./helpers/dialogs.js"
 
-function createDroppedLightItem(token, actor, lightInfos) {
+async function createDroppedLightItem(token, actor, lightInfos) {
     let protoToken = foundry.utils.duplicate(actor.prototypeToken)
     protoToken.x = token.center.x;
     protoToken.y = token.center.y;
-    canvas.scene.createEmbeddedDocuments("Token", [protoToken])
+    await canvas.scene.createEmbeddedDocuments("Token", [protoToken])
     if (adminMode()) return
     if (lightInfos.fuel != undefined) {
         let lightSourceItem = token.actor.items.find(e => e.name == lightInfos[useDdbItems() ? "ddbItemName" : "itemName"])
-        lightSourceItem.update({ data: { quantity: lightSourceItem.system.quantity - 1 } })
+        lightSourceItem.update({ system: { quantity: lightSourceItem.system.quantity - 1 } })
     }
 }
 
@@ -21,12 +21,14 @@ export function getEffect(token, lightInfo) {
 export function activateLightSource(token, lightInfos) {
     if (adminMode()) return
     let lightSources = token.actor.items.find( item => item.name == lightInfos[useDdbItems() ? "ddbItemName" : "itemName"])
+    console.log(lightSources)
     if (lightSources == undefined) return NO_LIGHT_SOURCES
-    if (lightSources.quantity < 1) return NO_LIGHT_SOURCES
+    if (lightSources.system.quantity < 1) return NO_LIGHT_SOURCES
     if (lightInfos.fuel == undefined) return
     let fuelItem = token.actor.items.find( item => item.name == lightInfos[useDdbItems() ? "ddbFuel" : "fuel"])
+    console.log(fuelItem)
     if (fuelItem == undefined) return NO_LIGHT_SOURCES
-    if (fuelItem.quantity < 1) return NO_LIGHT_SOURCES
+    if (fuelItem.system.quantity < 1) return NO_LIGHT_SOURCES
 }
 
 export function dropLightItem(token, lightInfos) {
