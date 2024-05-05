@@ -1,6 +1,6 @@
 import { LIGHT_SPELL_INFOS, LIGHT_BUTTONS_ORDER } from "../constants.js"
 import { dropLightItem, handleLightEffectAndChangeLight, getEffect, handleLightSpell, handleLightItem } from "../lightSourceHandler.js"
-import { askForLight } from "../sockets.js"
+import { askForLight, offerLightSource } from "../sockets.js"
 import { createButton, createLightSourceButtonObjects } from "./buttons.js"
 import { adminMode } from "./checks.js"
 
@@ -16,8 +16,10 @@ export function activeLightItemDialog(token, lightInfos) {
         handleLightEffectAndChangeLight(token, lightInfos)
     }, false)
 
-    let passOnButton = createButton(`${lightInfos.germanName} weitergeben`, () => {
+    let passOnButton = createButton(`${lightInfos.germanName} weitergeben`, async () => {
         ui.notifications.info(`${lightInfos.germanName} weiter gegeben`)
+
+        offerLightSource(lightInfos)
         handleLightEffectAndChangeLight(token, lightInfos)
     }, false)
 

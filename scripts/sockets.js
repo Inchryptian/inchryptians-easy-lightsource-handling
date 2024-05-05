@@ -6,6 +6,7 @@ Hooks.once("setup", () =>{
     socket = socketlib.registerModule("inchryptians-easy-lightsource-handling")
     socket.register("askOtherPlayerForLight", askOtherPlayerForLight)
     socket.register("deleteLightGM", deleteLightGM)
+    socket.register("offerLightSourceForPlayer", offerLightSourceForPlayer)
 })
 
 export function askForLight(request){
@@ -16,8 +17,16 @@ export function deleteLight(closeLightItem){
     socket.executeAsGM("deleteLightGM", closeLightItem.object.id)
 }
 
-export function offerLightSource(users, lightSource) {
-    socket.executeForUsers("offerLightSourceForPlayers", users, lightSource)
+export async function offerLightSource(lightSource) {
+    if(game.user.targets.length < 1){
+        return
+    }
+
+    if(game.user.targets.length > 1){
+        return
+    }
+    const users = Object.keys(game.user.targets.first().actor.ownership)
+    socket.executeForUsers("offerLightSourceForPlayer", users, game.user.targets.first().id, lightSource)
 }
 
 export function takeLightSource() {
@@ -31,17 +40,23 @@ function askOtherPlayerForLight(request){
         if(!token.owner) continue
         let acceptButton = createButton("Zulassen", () => handleLightEffectAndChangeLight(token, request.lightInfos))
         let declineButton = createButton("Ablehnen", () => {} , false)
-        new Dialog({
-            title: "Licht Angebot",
+        new foundry.applications.api.DialogV2({
+            window: { title: "Licht Angebot" },
             content: "Jemand wirkt einen Licht-Zauber auf dich",
-            buttons: {
+            buttons: [
                 acceptButton,
                 declineButton
-            },
+            ],
         }).render(true)        
     }
 }
 
 function deleteLightGM(closeLightItemTokenId){
     canvas.tokens.get(closeLightItemTokenId).document.delete()
+}
+
+async function offerLightSourceForPlayer(target, lightSource){
+    if(game.user.isGM) return
+    const token = canvas.tokens.ownedTokens.find( token => target === token.id )
+    handleLightEffectAndChangeLight(token, lightSource)
 }

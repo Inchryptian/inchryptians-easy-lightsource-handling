@@ -31,7 +31,7 @@ export function createLightSourceButtonObjects(token, lightInfos) {
         buttons.push(createButton(`${lightInfos.germanName} aufheben`, () => {
             ui.notifications.info(`${lightInfos.germanName} aufgehoben`)
             handleLightEffectAndChangeLight(token, lightInfos)
-            if (closeLightItem.sourceId.includes("Token")) deleteLight(closeLightItem)
+            if (closeLightItem.sourceId.includes("Token") && (Object.keys(closeLightItem.object.actor.ownership.length) < 3 )) deleteLight(closeLightItem)
             if (adminMode()) return
             if (lightInfos.fuel != undefined) {
                 createOrAddItemToInventory(token, lightInfos)
