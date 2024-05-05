@@ -1,6 +1,6 @@
 import { LIGHT_INFO_ORDER, NO_LIGHT_SOURCES } from "./constants.js"
 import { useDdbItems, adminMode } from "./helpers/checks.js"
-import { extinguishOrDropLightItemDialog, createDialogForLightSpell } from "./helpers/dialogs.js"
+import { activeLightItemDialog, createDialogForLightSpell } from "./helpers/dialogs.js"
 
 async function createDroppedLightItem(token, actor, lightInfos) {
     let protoToken = foundry.utils.duplicate(actor.prototypeToken)
@@ -60,12 +60,13 @@ export async function handleLightEffectAndChangeLight(token, lightInfos) {
 
 export function handleLightItem(token, buttons, lightInfos) {
     if (getEffect(token, lightInfos)) {
-        extinguishOrDropLightItemDialog(token, lightInfos)
+        activeLightItemDialog(token, lightInfos)
         return
     }
     if (Object.keys(buttons).length > 1) {
-        new Dialog({
-            title: `${lightInfos.germanName} aufheben oder neue anzünden`,
+        new foundry.applications.api.DialogV2({
+            window: { title: `${lightInfos.germanName} aufheben oder neue anzünden`},
+            content: "",
             buttons: buttons
         }).render(true);
         return
@@ -82,5 +83,17 @@ export function handleLightSpell(token, spellInfos, effect) {
         handleLightEffectAndChangeLight(token, spellInfos)
     } else {
         createDialogForLightSpell(token, spellInfos)
+    }
+}
+
+export function createOrAddItemToInventory(token, lightInfos){
+    let lightSourceItem = token.actor.items.find(item => item.name == lightInfos[useDdbItems() ? "ddbItemName" : "itemName"])
+    if (lightSourceItem != undefined) {
+        lightSourceItem.update({ system: { quantity: lightSourceItem.system.quantity + 1 } })
+    } else {
+        let compendiumItems = game.packs.get(useDdbItems() ? "world.ddb-data-hub-items" : "dnd5e.items")
+        let lightSourceItemId = compendiumItems.index.find(item => item.name == lightInfos[useDdbItems() ? "ddbItemName" : "itemName"])._id
+        compendiumItems.getDocument(lightSourceItemId)
+            .then(item => { token.actor.createEmbeddedDocuments("Item", [item]) })
     }
 }

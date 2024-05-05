@@ -13,7 +13,15 @@ export function askForLight(request){
 }
 
 export function deleteLight(closeLightItem){
-    socket.executeAsGM("deleteLightGM", closeLightItem.sourceId.split("Token.").pop())
+    socket.executeAsGM("deleteLightGM", closeLightItem.object.id)
+}
+
+export function offerLightSource(users, lightSource) {
+    socket.executeForUsers("offerLightSourceForPlayers", users, lightSource)
+}
+
+export function takeLightSource() {
+
 }
 
 function askOtherPlayerForLight(request){
