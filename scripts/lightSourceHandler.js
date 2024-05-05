@@ -3,7 +3,7 @@ import { useDdbItems, adminMode } from "./helpers/checks.js"
 import { extinguishOrDropLightItemDialog, createDialogForLightSpell } from "./helpers/dialogs.js"
 
 function createDroppedLightItem(token, actor, lightInfos) {
-    let protoToken = duplicate(actor.prototypeToken)
+    let protoToken = foundry.utils.duplicate(actor.prototypeToken)
     protoToken.x = token.center.x;
     protoToken.y = token.center.y;
     canvas.scene.createEmbeddedDocuments("Token", [protoToken])
@@ -44,7 +44,7 @@ export function dropLightItem(token, lightInfos) {
 }
 
 export async function handleLightEffectAndChangeLight(token, lightInfos) {
-    await token.document.toggleActiveEffect(lightInfos.effect)
+    await token.actor.toggleStatusEffect(lightInfos.effect.id)
     for (let lightInfo of LIGHT_INFO_ORDER) {
         let strongestEffect = getEffect(token, lightInfo)
         if (strongestEffect == undefined) continue

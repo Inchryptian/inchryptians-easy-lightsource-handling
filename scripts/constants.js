@@ -11,7 +11,7 @@ export const TORCH_INFOS = {
     effect: {
         id: "Torch",
         name: "Torch",
-        icon: "icons/sundries/lights/torch-brown-lit.webp" //might get renamed to img
+        img: "icons/sundries/lights/torch-brown-lit.webp" //might get renamed to img
     },
     data: light({ animation: { type: "torch", "speed": 3, "intensity": 2 } })
 }
@@ -25,7 +25,7 @@ export const CANDLE_INFOS = {
     effect: {
         id: "Candle",
         name: "Candle",
-        icon: "icons/sundries/lights/candle-unlit-tan.webp"
+        img: "icons/sundries/lights/candle-unlit-tan.webp"
     },
     data: light({ dim: 10, bright: 5, alpha: 0.15 })
 }
@@ -39,7 +39,7 @@ export const LAMP_INFOS = {
     effect: {
         id: "Lamp",
         name: "Lamp",
-        icon: "https://assets.forge-vtt.com/bazaar/systems/dnd5e/assets/icons/items/inventory/lamp.jpg"
+        img: "icons/sundries/lights/lantern-iron-lit-yellow.webp"
     },
     data: light({ dim: 20, bright: 10, alpha: 0.25 }),
     fuel: "Oil Flask",
@@ -55,7 +55,7 @@ export const BULLSEYE_INFOS = {
     effect: {
         id: "Bullseye",
         name: "Bullseye",
-        icon: "icons/sundries/lights/lantern-bullseye-signal-copper.webp"
+        img: "icons/sundries/lights/lantern-bullseye-signal-copper.webp"
     },
     data: light({ dim: 120, bright: 60, angle: 60, alpha: 0.3 }),
     fuel: "Oil Flask",
@@ -71,7 +71,7 @@ export const HOODED_LANTERN_CLOSED_INFOS = {
     effect: {
         id: "Hooded Lantern",
         name: "Hooded Lantern",
-        icon: "icons/sundries/lights/lantern-iron-yellow.webp"
+        img: "icons/sundries/lights/lantern-iron-yellow.webp"
     },
     data: light({ dim: 5, bright: 0, alpha: 0.2 }),
     fuel: "Oil Flask",
@@ -87,7 +87,7 @@ export const HOODED_LANTERN_OPEN_INFOS = {
     effect: {
         id: "Lantern",
         name: "Lantern",
-        icon: "icons/sundries/lights/lantern-iron-yellow.webp"
+        img: "icons/sundries/lights/lantern-iron-yellow.webp"
     },
     data: light({ dim: 60, bright: 30 }),
     fuel: "Oil Flask",
@@ -100,7 +100,7 @@ export const LIGHT_SPELL_INFOS = {
     effect: {
         id: "Light",
         name: "Light",
-        icon: "icons/magic/light/explosion-star-small-blue-yellow.webp"
+        img: "icons/magic/light/explosion-star-small-blue-yellow.webp"
     },
     data: light()
 }

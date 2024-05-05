@@ -57,7 +57,7 @@ export function createMainDialog(token) {
             buttons: mainMenuButtons,
         }, { width: 600 }).render(true)
     }
-    if (isEmpty(mainMenuButtons)) {
+    if (foundry.utils.isEmpty(mainMenuButtons)) {
         ui.notifications.error(`Keine Lichtquellen im Inventar oder in der Nähe`)
         return
     }

@@ -1,7 +1,7 @@
 import { NO_LIGHT_SOURCES_AVAILABLE_OR_CLOSE } from "../constants.js"
 
 function inReach(token, lightSource, distance) {
-    return !(canvas.grid.measureDistance(token, lightSource) > distance)
+    return !(canvas.grid.measurePath([token, lightSource]) > distance)
 }
 
 export function useDdbItems() {
