@@ -26,7 +26,9 @@ export function activeLightItemDialog(token, lightInfos) {
 
         offerLightSource(lightInfos)
         handleLightEffectAndChangeLight(token, lightInfos)
-        removeItemFromInventory(token, lightInfos)
+        if (lightInfos.fuel != undefined) {
+            removeItemFromInventory(token, lightInfos)
+        }
     }, false)
 
     new foundry.applications.api.DialogV2({

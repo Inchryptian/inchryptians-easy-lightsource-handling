@@ -1,7 +1,7 @@
 import { NO_LIGHT_SOURCES_AVAILABLE_OR_CLOSE, NO_LIGHT_SOURCES } from "../constants.js"
 import { handleLightEffectAndChangeLight, activateLightSource, createOrAddItemToInventory } from "../lightSourceHandler.js"
 import { useDdbItems, adminMode, checkIfLightItemIsClose } from "./checks.js"
-import { deleteLight } from "../sockets.js"
+import { deleteLight, takeLightSource } from "../sockets.js"
 
 export function createLightButton() {
     let button = document.createElement('div')
@@ -32,6 +32,7 @@ export function createLightSourceButtonObjects(token, lightInfos) {
             ui.notifications.info(`${lightInfos.germanName} aufgehoben`)
             handleLightEffectAndChangeLight(token, lightInfos)
             if (closeLightItem.sourceId.includes("Token") && (closeLightItem.object.actor === null )) deleteLight(closeLightItem)
+            if (closeLightItem.sourceId.includes("Token") && (closeLightItem.object.actor != null)) takeLightSource(closeLightItem, lightInfos)
             if (adminMode()) return
             if (lightInfos.fuel != undefined) {
                 createOrAddItemToInventory(token, lightInfos)
