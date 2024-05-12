@@ -9,9 +9,13 @@ async function createDroppedLightItem(token, actor, lightInfos) {
     await canvas.scene.createEmbeddedDocuments("Token", [protoToken])
     if (adminMode()) return
     if (lightInfos.fuel != undefined) {
-        let lightSourceItem = token.actor.items.find(e => e.name == lightInfos[useDdbItems() ? "ddbItemName" : "itemName"])
-        lightSourceItem.update({ system: { quantity: lightSourceItem.system.quantity - 1 } })
+        removeItemFromInventory(token, lightInfos)
     }
+}
+
+export function removeItemFromInventory(token, lightInfos) {
+    let lightSourceItem = token.actor.items.find(e => e.name == lightInfos[useDdbItems() ? "ddbItemName" : "itemName"])
+    lightSourceItem.update({ system: { quantity: lightSourceItem.system.quantity - 1 } })
 }
 
 export function getEffect(token, lightInfo) {

@@ -1,5 +1,5 @@
 import { createButton } from "./helpers/buttons.js"
-import { handleLightEffectAndChangeLight } from "./lightSourceHandler.js"
+import { handleLightEffectAndChangeLight, createOrAddItemToInventory } from "./lightSourceHandler.js"
 let socket 
 
 Hooks.once("setup", () =>{
@@ -18,14 +18,8 @@ export function deleteLight(closeLightItem){
 }
 
 export async function offerLightSource(lightSource) {
-    if(game.user.targets.length < 1){
-        return
-    }
-
-    if(game.user.targets.length > 1){
-        return
-    }
-    const users = Object.keys(game.user.targets.first().actor.ownership)
+    //For multiple targets [...new Set(...game.user.targets.map(i => Object.keys(i.actor.ownership)))].filter(i => i !== 'default')
+    const users = Object.keys(game.user.targets.first().actor.ownership).filter(i => i !== 'default')
     socket.executeForUsers("offerLightSourceForPlayer", users, game.user.targets.first().id, lightSource)
 }
 
@@ -55,8 +49,10 @@ function deleteLightGM(closeLightItemTokenId){
     canvas.tokens.get(closeLightItemTokenId).document.delete()
 }
 
-async function offerLightSourceForPlayer(target, lightSource){
+async function offerLightSourceForPlayer(target, lightInfos){
     if(game.user.isGM) return
     const token = canvas.tokens.ownedTokens.find( token => target === token.id )
-    handleLightEffectAndChangeLight(token, lightSource)
+    handleLightEffectAndChangeLight(token, lightInfos)
+    console.log(lightInfos)
+    if(lightInfos.fuel !== undefined) createOrAddItemToInventory(token, lightInfos)
 }

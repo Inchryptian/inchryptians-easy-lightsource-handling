@@ -27,7 +27,7 @@ export function createButton(label, callbackFunction, active = true, picture = n
 export function createLightSourceButtonObjects(token, lightInfos) {
     let buttons = []
     const closeLightItem = checkIfLightItemIsClose(token, lightInfos)
-    if ( closeLightItem != NO_LIGHT_SOURCES_AVAILABLE_OR_CLOSE){
+    if ( closeLightItem != NO_LIGHT_SOURCES_AVAILABLE_OR_CLOSE ){
         buttons.push(createButton(`${lightInfos.germanName} aufheben`, () => {
             ui.notifications.info(`${lightInfos.germanName} aufgehoben`)
             handleLightEffectAndChangeLight(token, lightInfos)

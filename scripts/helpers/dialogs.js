@@ -1,5 +1,5 @@
 import { LIGHT_SPELL_INFOS, LIGHT_BUTTONS_ORDER } from "../constants.js"
-import { dropLightItem, handleLightEffectAndChangeLight, getEffect, handleLightSpell, handleLightItem } from "../lightSourceHandler.js"
+import { dropLightItem, handleLightEffectAndChangeLight, getEffect, handleLightSpell, handleLightItem, removeItemFromInventory } from "../lightSourceHandler.js"
 import { askForLight, offerLightSource } from "../sockets.js"
 import { createButton, createLightSourceButtonObjects } from "./buttons.js"
 import { adminMode } from "./checks.js"
@@ -17,10 +17,16 @@ export function activeLightItemDialog(token, lightInfos) {
     }, false)
 
     let passOnButton = createButton(`${lightInfos.germanName} weitergeben`, async () => {
+        if(game.user.targets.size !== 1){
+            ui.notifications.info("Bitte genau einen Actor Targeten")
+            return 
+        }
+
         ui.notifications.info(`${lightInfos.germanName} weiter gegeben`)
 
         offerLightSource(lightInfos)
         handleLightEffectAndChangeLight(token, lightInfos)
+        removeItemFromInventory(token, lightInfos)
     }, false)
 
     new foundry.applications.api.DialogV2({
@@ -82,6 +88,7 @@ export function createDialogForLightSpell(token, spellInfos){
 
 function addItemButtonsToMenu(mainMenuButtons, token, lightInfos) {
     let lightItemButtons = createLightSourceButtonObjects(token, lightInfos)
+    console.log(lightItemButtons)
     let handleLightItemButton = createButton(lightInfos.germanName, () => handleLightItem(token, lightItemButtons, lightInfos), getEffect(token, lightInfos) != undefined, lightInfos.effect.img)
     if (Object.keys(lightItemButtons).length > 0 || getEffect(token, lightInfos)) mainMenuButtons.push(handleLightItemButton)
     return mainMenuButtons
