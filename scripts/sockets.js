@@ -53,6 +53,5 @@ async function offerLightSourceForPlayer(target, lightInfos){
     if(game.user.isGM) return
     const token = canvas.tokens.ownedTokens.find( token => target === token.id )
     handleLightEffectAndChangeLight(token, lightInfos)
-    console.log(lightInfos)
     if(lightInfos.fuel !== undefined) createOrAddItemToInventory(token, lightInfos)
 }

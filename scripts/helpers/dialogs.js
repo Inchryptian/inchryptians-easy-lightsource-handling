@@ -88,7 +88,6 @@ export function createDialogForLightSpell(token, spellInfos){
 
 function addItemButtonsToMenu(mainMenuButtons, token, lightInfos) {
     let lightItemButtons = createLightSourceButtonObjects(token, lightInfos)
-    console.log(lightItemButtons)
     let handleLightItemButton = createButton(lightInfos.germanName, () => handleLightItem(token, lightItemButtons, lightInfos), getEffect(token, lightInfos) != undefined, lightInfos.effect.img)
     if (Object.keys(lightItemButtons).length > 0 || getEffect(token, lightInfos)) mainMenuButtons.push(handleLightItemButton)
     return mainMenuButtons
