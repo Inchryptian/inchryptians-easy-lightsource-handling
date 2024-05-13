@@ -49,5 +49,13 @@ export const lightSourceHandlingSettings = [
             restricted: true,
             default: false,
             scope: "world"}
+    }, {
+        settingName: "pandaBar",
+        settingObject: { name: "Colorfull static Health bar",
+            config: true,
+            type: Boolean,
+            restricted: true,
+            default: false,
+            scope: "world"}
     }
 ]
