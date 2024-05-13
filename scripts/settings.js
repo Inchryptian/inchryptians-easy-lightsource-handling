@@ -41,5 +41,13 @@ export const lightSourceHandlingSettings = [
             restricted: true,
             default: 0.3,
             scope: "world"}
+    }, {
+        settingName: "questionMarksOnNPCHealth",
+        settingObject: { name: "Question marks on NPc Health bars",
+            config: true,
+            type: Boolean,
+            restricted: true,
+            default: false,
+            scope: "world"}
     }
 ]

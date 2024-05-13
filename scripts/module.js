@@ -26,3 +26,28 @@ Hooks.on("ready", () => {
         CONFIG.statusEffects.push(lightInfo.effect)
     }
 })
+
+Hooks.on("canvasReady", async (canvas) => {
+    if(!game.settings.get("inchryptians-easy-lightsource-handling", "questionMarksOnNPCHealth")) return 
+    await canvas.initializing
+    for(let token of canvas.tokens.placeables) {
+        if(!(token.document.actor.type === "npc")) continue
+        let pt = new PreciseText("? ? ?", {fontWeight: "bolder",  fontFamily: "Signika", fontSize: "7px", align: "center"})
+        token.bars.bar1.addChild(pt)
+        pt.x = pt.parent.width / 2
+        pt.anchor.x = 0.5
+    }
+})
+
+Hooks.on("dropCanvasData", async (canvas, data) => {
+    if(!game.settings.get("inchryptians-easy-lightsource-handling", "questionMarksOnNPCHealth")) return 
+    await canvas.initializing
+    for(let token of canvas.tokens.placeables) {
+        if(token.bars.bar1.children.length > 0 ) continue
+        if(!(token.document.actor.type === "npc")) continue
+        let pt = new PreciseText("? ? ?", {fontWeight: "bolder",  fontFamily: "Signika", fontSize: "7px", align: "center"})
+        token.bars.bar1.addChild(pt)
+        pt.x = pt.parent.width / 2
+        pt.anchor.x = 0.5
+    }
+})
