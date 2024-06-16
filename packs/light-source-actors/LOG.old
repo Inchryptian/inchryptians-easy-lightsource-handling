@@ -1,3 +1,7 @@
-2024/05/13-13:43:00.157 3394 Recovering log #187
-2024/05/13-13:43:00.161 3394 Delete type=0 #187
-2024/05/13-13:43:00.161 3394 Delete type=3 #186
+2024/06/09-13:37:29.918 3d9c Recovering log #209
+2024/06/09-13:37:29.919 3d9c Delete type=0 #209
+2024/06/09-13:37:29.919 3d9c Delete type=3 #207
+2024/06/09-13:38:30.107 a3c Level-0 table #215: started
+2024/06/09-13:38:30.107 a3c Level-0 table #215: 0 bytes OK
+2024/06/09-13:38:30.108 a3c Delete type=0 #213
+2024/06/09-13:38:30.110 a3c Manual compaction at level-0 from '!actors!4BD9k8B9TDOS6ytk' @ 72057594037927935 : 1 .. '!actors!zWsHhJpPhuMF5ULb' @ 0 : 0; will stop at (end)

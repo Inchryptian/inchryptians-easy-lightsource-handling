@@ -27,58 +27,60 @@ Hooks.on("ready", () => {
     }
 })
 
-Hooks.on("canvasReady", async (canvas) => {
+Hooks.on("refreshToken", async (token) => {
     if(!game.settings.get("inchryptians-easy-lightsource-handling", "questionMarksOnNPCHealth")) return 
-    await canvas.initializing
+    if(token.bars.bar1.children.length >= 1) return 
     if(game.settings.get("inchryptians-easy-lightsource-handling", "pandaBar")){
-        for(let token of canvas.tokens.placeables) {
-            if(!(token.document.actor.type === "npc")) continue
-            
-            let sprite = new PIXI.Sprite(PIXI.Texture.from("modules/inchryptians-easy-lightsource-handling/images/AlternateHPBar.png"))
-            token.bars.bar1.addChild(sprite)
-            sprite.width = sprite.parent.width*1.01
-            sprite.height = sprite.parent.height * 2
-            sprite.anchor.x = 0.01
-            sprite.anchor.y = 0.1
-        }
+        
+        if(!(token.document.actor.type === "npc")) return
+        let texture = PIXI.Texture.from("modules/inchryptians-easy-lightsource-handling/images/AlternateHPBar.png")
+        let sprite = new PIXI.Sprite(texture)
+        let scaleRatio = (token.border.width - 4) / sprite.width
+
+        if(scaleRatio > 2) return
+        token.bars.bar1.addChild(sprite)
+        sprite.x = sprite.x - 1
+        sprite.y = sprite.y - 1
+        sprite.scale.x = scaleRatio
+        sprite.scale.y = scaleRatio
+        
     }
     else {
-        for(let token of canvas.tokens.placeables) {
-            if(!(token.document.actor.type === "npc")) continue
-            
-            let text = new PreciseText("? ? ?", {fontWeight: "bolder",  fontFamily: "Signika", fontSize: "7px", align: "center"})
-            token.bars.bar1.addChild(text)
-            text.x = text.parent.width / 2
-            text.anchor.x = 0.5
-        }
+        if(!(token.document.actor.type === "npc")) return
+        
+        let text = new PreciseText("? ? ?", {fontWeight: "bolder",  fontFamily: "Signika", fontSize: "7px", align: "center"})
+        token.bars.bar1.addChild(text)
+        text.x = text.parent.width / 2
+        text.anchor.x = 0.5
+        
     }
 })
 
-Hooks.on("dropCanvasData", async (canvas, data) => {
-    if(!game.settings.get("inchryptians-easy-lightsource-handling", "questionMarksOnNPCHealth")) return 
-    await canvas.initializing
-    if(game.settings.get("inchryptians-easy-lightsource-handling", "pandaBar")){
-        for(let token of canvas.tokens.placeables) {
-            if(token.bars.bar1.children.length > 0 ) continue
-            if(!(token.document.actor.type === "npc")) continue
+// Hooks.on("dropCanvasData", async (canvas, data) => {
+//     if(!game.settings.get("inchryptians-easy-lightsource-handling", "questionMarksOnNPCHealth")) return 
+//     await canvas.initializing
+//     if(game.settings.get("inchryptians-easy-lightsource-handling", "pandaBar")){
+//         for(let token of canvas.tokens.placeables) {
+//             if(token.bars.bar1.children.length > 0 ) continue
+//             if(!(token.document.actor.type === "npc")) continue
             
-            let sprite = new PIXI.Sprite(PIXI.Texture.from("modules/inchryptians-easy-lightsource-handling/images/AlternateHPBar.png"))
-            token.bars.bar1.addChild(sprite)
-            sprite.width = sprite.parent.width*1.01
-            sprite.height = sprite.parent.height * 2
-            sprite.anchor.x = 0.01
-            sprite.anchor.y = 0.1
-        }
-    }
-    else {
-        for(let token of canvas.tokens.placeables) {
-            if(token.bars.bar1.children.length > 0 ) continue
-            if(!(token.document.actor.type === "npc")) continue
+//             let sprite = new PIXI.Sprite(PIXI.Texture.from("modules/inchryptians-easy-lightsource-handling/images/AlternateHPBar.png"))
+//             token.bars.bar1.addChild(sprite)
+//             sprite.width = sprite.parent.width*1.01
+//             sprite.height = sprite.parent.height * 2
+//             sprite.anchor.x = 0.01
+//             sprite.anchor.y = 0.1
+//         }
+//     }
+//     else {
+//         for(let token of canvas.tokens.placeables) {
+//             if(token.bars.bar1.children.length > 0 ) continue
+//             if(!(token.document.actor.type === "npc")) continue
             
-            let text = new PreciseText("? ? ?", {fontWeight: "bolder",  fontFamily: "Signika", fontSize: "7px", align: "center"})
-            token.bars.bar1.addChild(text)
-            text.x = text.parent.width / 2
-            text.anchor.x = 0.5
-        }
-    }
-})
+//             let text = new PreciseText("? ? ?", {fontWeight: "bolder",  fontFamily: "Signika", fontSize: "7px", align: "center"})
+//             token.bars.bar1.addChild(text)
+//             text.x = text.parent.width / 2
+//             text.anchor.x = 0.5
+//         }
+//     }
+// })
