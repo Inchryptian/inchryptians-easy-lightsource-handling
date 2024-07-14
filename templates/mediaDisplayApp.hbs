@@ -1,0 +1,14 @@
+<form class="media-display">
+    <div class="image-container">
+        <img src="{{imageLocation}}" alt="image"/>
+    </div>
+    <div class="author-info-container">
+        <div class="form-group author-input text-sizing" style="{{#unless isGM}} display: none; {{/unless}}">
+            <label class="white-text" >Artist: </label>
+            <input class="white-text" name="author" value="{{text}}" type="text"/>
+        </div>
+        <div class="author-selected text-sizing" style="{{#if isGM}} display: none; {{/if}}">
+            <p class="white-text" style="{{#unless textIsEmpty}} display: none;{{/unless}}">Artist: {{text}}</p>
+        </div>
+    </div>
+</form>

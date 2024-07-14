@@ -1,0 +1,30 @@
+.transparent-window {
+    min-width: 300px;
+  }
+  .transparent-window .window-content {
+    background: rgba(0, 0, 0, 0);
+  }
+  .transparent-window .white-text {
+    color: white !important;
+  }
+  .transparent-window .text-sizing {
+    height: 1.5rem;
+  }
+  .transparent-window .media-display {
+    position: relative;
+    max-height: calc(100% - 20px);
+  }
+  .transparent-window .image-container {
+    height: 95%;
+    text-align: center;
+  }
+  .transparent-window .image-container img {
+    border: #000000;
+    max-height: 100%;
+  }
+  .transparent-window .author-info-container {
+    height: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }

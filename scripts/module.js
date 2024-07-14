@@ -2,6 +2,8 @@ import { createLightButton } from "./helpers/buttons.js"
 import { lightSourceHandlingSettings } from "./settings.js"
 import { LIGHT_INFO_ORDER } from "./constants.js"
 import { createMainDialog } from "./helpers/dialogs.js"
+import { createArtButton, createNewMediaDisplayApp, prepTokenKeybinding, receiveSharedImages } from "./art_with_credits/lib.js"
+import { registerSettings } from './art_with_credits/settings.js';
 
 Hooks.on('renderTokenHUD', (hud, html) => {
     
@@ -12,9 +14,21 @@ Hooks.on('renderTokenHUD', (hud, html) => {
     })
 
     html.children('.left').append(lightButton)
+    const artButton = createArtButton();
+    const actor = hud.object.document.actor
+
+    artButton.on('click', () => {
+        createNewMediaDisplayApp(actor.img, actor, 'token');
+    });
+    artButton.on('contextmenu', () => {
+        createNewMediaDisplayApp(actor.img, actor, 'main');
+    })
+
+    html.children('.left').append(artButton);
 })
 
 Hooks.on("init", () => {
+    registerSettings()
     window.createMainDialogForInchryptianModule = createMainDialog
     for (let setting of lightSourceHandlingSettings) {
         game.settings.register("inchryptians-easy-lightsource-handling", setting.settingName, setting.settingObject)
@@ -25,6 +39,8 @@ Hooks.on("ready", () => {
     for(let lightInfo of LIGHT_INFO_ORDER) {
         CONFIG.statusEffects.push(lightInfo.effect)
     }
+    console.log('setting up socket connection');
+    game.socket.on('module.inchryptians-easy-lightsource-handling', receiveSharedImages);
 })
 
 Hooks.on("refreshToken", async (token) => {
@@ -56,31 +72,5 @@ Hooks.on("refreshToken", async (token) => {
     }
 })
 
-// Hooks.on("dropCanvasData", async (canvas, data) => {
-//     if(!game.settings.get("inchryptians-easy-lightsource-handling", "questionMarksOnNPCHealth")) return 
-//     await canvas.initializing
-//     if(game.settings.get("inchryptians-easy-lightsource-handling", "pandaBar")){
-//         for(let token of canvas.tokens.placeables) {
-//             if(token.bars.bar1.children.length > 0 ) continue
-//             if(!(token.document.actor.type === "npc")) continue
-            
-//             let sprite = new PIXI.Sprite(PIXI.Texture.from("modules/inchryptians-easy-lightsource-handling/images/AlternateHPBar.png"))
-//             token.bars.bar1.addChild(sprite)
-//             sprite.width = sprite.parent.width*1.01
-//             sprite.height = sprite.parent.height * 2
-//             sprite.anchor.x = 0.01
-//             sprite.anchor.y = 0.1
-//         }
-//     }
-//     else {
-//         for(let token of canvas.tokens.placeables) {
-//             if(token.bars.bar1.children.length > 0 ) continue
-//             if(!(token.document.actor.type === "npc")) continue
-            
-//             let text = new PreciseText("? ? ?", {fontWeight: "bolder",  fontFamily: "Signika", fontSize: "7px", align: "center"})
-//             token.bars.bar1.addChild(text)
-//             text.x = text.parent.width / 2
-//             text.anchor.x = 0.5
-//         }
-//     }
-// })
+Hooks.on("controlToken", (...args) => prepTokenKeybinding(...args));
+Hooks.on("hoverToken", (...args) => prepTokenKeybinding(...args));
