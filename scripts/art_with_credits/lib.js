@@ -1,5 +1,5 @@
 import {setImageSize, MediaDisplayApp, setExtraData} from './MediaDisplayApp.js';
-import {getMacroKey, isCorrectModifierPressed} from './settings.js';
+import {getMacroKey, getPressedModifier} from './settings.js';
 
 const createArtButton = () => {
   let button = document.createElement('div');
@@ -57,27 +57,47 @@ const shareImage = async (imgPath, text, actorId, type) => {
 
 const prepTokenKeybinding = (token, control) => {
   const doc = $(document);
-  doc.off('keydown.showArt');
+  doc.off('keydown.inchryptians-easy-lightsource-handling');
+  doc.off('keyup.inchryptians-easy-lightsource-handling');
   if (!control) return;
   const actor = game.actors.get(token.actor.id);
   const image = actor.img;
-  const tokenImage = token.img;
+  const tokenImage = token.document.texture.src;
 
-  doc.on('keydown.showArt', (event) => keyEventHandler(event, image, tokenImage, actor));
+  doc.on('keydown.inchryptians-easy-lightsource-handling', (event) => keyDownEventHandler(event, image, tokenImage, actor));
+  doc.on('keyup.inchryptians-easy-lightsource-handling', (event => keyUpEventHandler(event, actor)))
 };
 
-const keyEventHandler = async (event, image, tokenImage, actor) => {
-  if (isCorrectModifierPressed(event) && event.key.toLowerCase() === getMacroKey('showTokenToEveryOne') && game.user.isGM) {
+async function keyDownEventHandler(event, image, tokenImage, actor){
+  const showTokenToEveryone = getPressedModifier(event) && event.key.toLowerCase() === getMacroKey('showTokenToEveryOne') && game.user.isGM
+  const showArtToEveryone = getPressedModifier(event) && event.key.toLowerCase() === getMacroKey('showArtToEveryOne') && game.user.isGM
+  const showToken = getPressedModifier(event) && event.key.toLowerCase() === getMacroKey('openToken')
+  const showArt = getPressedModifier(event) && event.key.toLowerCase() === getMacroKey('openArt')
+  
+  if (showTokenToEveryone) {
     createNewMediaDisplayApp(tokenImage, actor, 'token');
-    await shareImage(tokenImage, actor.getFlag('inchryptians-easy-lightsource-handling', 'Author-token'), actor.id, 'token');
-  } else if (isCorrectModifierPressed(event) && event.key.toLowerCase() === getMacroKey('showArtToEveryOne') && game.user.isGM) {
-    createNewMediaDisplayApp(image, actor, 'main');
-    await shareImage(image, actor.getFlag('inchryptians-easy-lightsource-handling', 'Author-main'), actor.id, 'main');
-  } else if (isCorrectModifierPressed(event) && event.key.toLowerCase() === getMacroKey('openToken')) {
-    createNewMediaDisplayApp(tokenImage, actor, 'token');
-  } else if (isCorrectModifierPressed(event) && event.key.toLowerCase() === getMacroKey('openArt')) {
-    createNewMediaDisplayApp(image, actor, 'main');
+    return await shareImage(tokenImage, actor.getFlag('inchryptians-easy-lightsource-handling', 'Author-token'), actor.id, 'token');
   }
+  if (showArtToEveryone) {
+    createNewMediaDisplayApp(image, actor, 'main');
+    return await shareImage(image, actor.getFlag('inchryptians-easy-lightsource-handling', 'Author-main'), actor.id, 'main');
+  }  
+  if (showToken) {
+    return createNewMediaDisplayApp(tokenImage, actor, 'token');
+  }
+  if (showArt) {
+    return createNewMediaDisplayApp(image, actor, 'main');
+  }
+  
 };
+
+async function keyUpEventHandler(event, actor){
+  const setUnconcious = getPressedModifier(event) && event.key.toLowerCase() === getMacroKey('setUnconcious')
+  if (setUnconcious) {
+    await actor.toggleStatusEffect("unconscious")
+    await actor.toggleStatusEffect("prone")
+    return 
+  }
+}
 
 export { prepTokenKeybinding, receiveSharedImages, createArtButton, createNewMediaDisplayApp };
