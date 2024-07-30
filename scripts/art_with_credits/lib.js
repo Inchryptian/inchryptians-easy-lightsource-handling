@@ -1,5 +1,6 @@
 import {setImageSize, MediaDisplayApp, setExtraData} from './MediaDisplayApp.js';
 import {getMacroKey, getPressedModifier} from './settings.js';
+import {shareImage} from "../sockets.js"
 
 const createArtButton = () => {
   let button = document.createElement('div');
@@ -40,19 +41,6 @@ const createNewMediaDisplayApp = (imagePath, actor, type) => {
   };
 
   img.src = imagePath;
-};
-
-const receiveSharedImages = (receivedObject) => {
-  createReceivedMediaDisplayApp(receivedObject);
-};
-
-const shareImage = async (imgPath, text, actorId, type) => {
-  await game.socket.emit('module.inchryptians-easy-lightsource-handling', {
-    imgPath: imgPath,
-    text: text,
-    actorId: actorId,
-    type: type
-  });
 };
 
 const prepTokenKeybinding = (token, control) => {
@@ -100,4 +88,4 @@ async function keyUpEventHandler(event, actor){
   }
 }
 
-export { prepTokenKeybinding, receiveSharedImages, createArtButton, createNewMediaDisplayApp };
+export { prepTokenKeybinding, createArtButton, createNewMediaDisplayApp, createReceivedMediaDisplayApp };

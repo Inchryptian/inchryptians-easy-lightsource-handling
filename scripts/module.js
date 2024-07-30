@@ -2,7 +2,7 @@ import { createLightButton } from "./helpers/buttons.js"
 import { lightSourceHandlingSettings } from "./settings.js"
 import { LIGHT_INFO_ORDER } from "./constants.js"
 import { createMainDialog } from "./helpers/dialogs.js"
-import { createArtButton, createNewMediaDisplayApp, prepTokenKeybinding, receiveSharedImages } from "./art_with_credits/lib.js"
+import { createArtButton, createNewMediaDisplayApp, prepTokenKeybinding} from "./art_with_credits/lib.js"
 import { registerSettings } from './art_with_credits/settings.js';
 
 Hooks.on('renderTokenHUD', (hud, html) => {
@@ -40,7 +40,6 @@ Hooks.on("ready", () => {
         CONFIG.statusEffects.push(lightInfo.effect)
     }
     console.log('setting up socket connection');
-    game.socket.on('module.inchryptians-easy-lightsource-handling', receiveSharedImages);
 })
 
 Hooks.on("refreshToken", async (token) => {
@@ -48,6 +47,7 @@ Hooks.on("refreshToken", async (token) => {
     if(token.bars.bar1.children.length >= 1) return 
     if(game.settings.get("inchryptians-easy-lightsource-handling", "pandaBar")){
         
+        if(token.document.actor === null) return 
         if(!(token.document.actor.type === "npc")) return
         let texture = PIXI.Texture.from("modules/inchryptians-easy-lightsource-handling/images/AlternateHPBar.png")
         let sprite = new PIXI.Sprite(texture)

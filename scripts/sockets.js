@@ -1,5 +1,6 @@
 import { createButton } from "./helpers/buttons.js"
 import { handleLightEffectAndChangeLight, createOrAddItemToInventory, removeItemFromInventory } from "./lightSourceHandler.js"
+import { createReceivedMediaDisplayApp } from "./art_with_credits/lib.js"
 let socket 
 
 Hooks.once("setup", () =>{
@@ -8,6 +9,7 @@ Hooks.once("setup", () =>{
     socket.register("deleteLightGM", deleteLightGM)
     socket.register("offerLightSourceForPlayer", offerLightSourceForPlayer)
     socket.register("removeEffectForUser", removeEffectForUser)
+    socket.register("shareImages", receiveSharedImages)
 })
 
 export function askForLight(request){
@@ -29,6 +31,15 @@ export function takeLightSource(lightSourceActor, lightInfos) {
     console.log(lightSourceActor)
     socket.executeForUsers("removeEffectForUser", users, lightSourceActor.object.id, lightInfos)
 }
+
+export async function shareImage(imgPath, text, actorId, type){
+    await socket.executeForUsers('shareImages', {
+      imgPath: imgPath,
+      text: text,
+      actorId: actorId,
+      type: type
+    });
+  };
 
 function askOtherPlayerForLight(request){
     if(!game.settings.get("inchryptians-easy-lightsource-handling", "lightRequestsForAdmin") && game.user.isGM) return
@@ -67,3 +78,8 @@ async function removeEffectForUser(tokenId, lightInfos){
         removeItemFromInventory(token, lightInfos)
     }
 }
+
+function receiveSharedImages(receivedObject) {
+    if(receivedObject.handlerName != null) return
+    createReceivedMediaDisplayApp(receivedObject);
+  };
