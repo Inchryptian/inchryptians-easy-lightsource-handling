@@ -33,7 +33,7 @@ export function takeLightSource(lightSourceActor, lightInfos) {
 }
 
 export async function shareImage(imgPath, text, actorId, type){
-    await socket.executeForUsers('shareImages', {
+    await socket.executeForEveryone('shareImages', {
       imgPath: imgPath,
       text: text,
       actorId: actorId,
