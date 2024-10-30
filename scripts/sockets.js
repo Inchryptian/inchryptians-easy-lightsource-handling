@@ -23,6 +23,7 @@ export function deleteLight(closeLightItem){
 export async function offerLightSource(lightSource) {
     //For multiple targets [...new Set(...game.user.targets.map(i => Object.keys(i.actor.ownership)))].filter(i => i !== 'default')
     const users = Object.keys(game.user.targets.first().actor.ownership).filter(i => i !== 'default')
+    console.log("TEST")
     socket.executeForUsers("offerLightSourceForPlayer", users, game.user.targets.first().id, lightSource)
 }
 

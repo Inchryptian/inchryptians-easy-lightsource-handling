@@ -22,10 +22,9 @@ export function activeLightItemDialog(token, lightInfos) {
             return 
         }
 
-        ui.notifications.info(`${lightInfos.germanName} weiter gegeben`)
-
         offerLightSource(lightInfos)
         handleLightEffectAndChangeLight(token, lightInfos)
+        ui.notifications.info(`${lightInfos.germanName} weiter gegeben`)
         if (lightInfos.fuel != undefined) {
             removeItemFromInventory(token, lightInfos)
         }
@@ -35,7 +34,7 @@ export function activeLightItemDialog(token, lightInfos) {
         window: { title: `${lightInfos.germanName} löschen, fallen lassen oder weiter geben`},
         content: "",
         buttons: [
-            passOnButton,
+            //passOnButton,
             dropLightItemButton,
             extinguishTorchButton
         ]
