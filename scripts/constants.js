@@ -11,7 +11,16 @@ export const TORCH_INFOS = {
     effect: {
         id: "Torch",
         name: "Torch",
-        img: "icons/sundries/lights/torch-brown-lit.webp" 
+        img: "icons/sundries/lights/torch-brown-lit.webp",
+        changes: [
+            { key: "ATL.light.dim", mode: 5, priority: null, value: "40" },
+            { key: "ATL.light.bright", mode: 5, priority: null, value: "20" },
+            { key: "ATL.light.animation.type", mode: 5, priority: null, value: "torch" },
+            { key: "ATL.light.animation.speed", mode: 5, priority: null, value: "3" },
+            { key: "ATL.light.animation.intensity", mode: 5, priority: null, value: "2" },
+            { key: "ATL.light.alpha", mode: 5, priority: null, value: "0.3" },
+            { key: "ATL.light.color", mode: 5, priority: null, value: "#f98026" }
+        ]
     },
     data: light({ animation: { type: "torch", "speed": 3, "intensity": 2 } })
 }
@@ -25,7 +34,16 @@ export const CANDLE_INFOS = {
     effect: {
         id: "Candle",
         name: "Candle",
-        img: "icons/sundries/lights/candle-unlit-tan.webp"
+        img: "icons/sundries/lights/candle-unlit-tan.webp",
+        changes: [
+            { key: "ATL.light.dim", mode: 5, priority: null, value: "10" },
+            { key: "ATL.light.bright", mode: 5, priority: null, value: "5" },
+            { key: "ATL.light.animation.type", mode: 5, priority: null, value: "torch" },
+            { key: "ATL.light.animation.speed", mode: 5, priority: null, value: "1" },
+            { key: "ATL.light.animation.intensity", mode: 5, priority: null, value: "1" },
+            { key: "ATL.light.alpha", mode: 5, priority: null, value: "0.15" },
+            { key: "ATL.light.color", mode: 5, priority: null, value: "#f98026" }
+        ]
     },
     data: light({ dim: 10, bright: 5, alpha: 0.15 })
 }
@@ -39,7 +57,16 @@ export const LAMP_INFOS = {
     effect: {
         id: "Lamp",
         name: "Lamp",
-        img: "icons/sundries/lights/lantern-iron-lit-yellow.webp"
+        img: "icons/sundries/lights/lantern-iron-lit-yellow.webp",
+        changes: [
+            { key: "ATL.light.dim", mode: 5, priority: null, value: "20" },
+            { key: "ATL.light.bright", mode: 5, priority: null, value: "10" },
+            { key: "ATL.light.animation.type", mode: 5, priority: null, value: "torch" },
+            { key: "ATL.light.animation.speed", mode: 5, priority: null, value: "1" },
+            { key: "ATL.light.animation.intensity", mode: 5, priority: null, value: "1" },
+            { key: "ATL.light.alpha", mode: 5, priority: null, value: "0.25" },
+            { key: "ATL.light.color", mode: 5, priority: null, value: "#f98026" }
+        ]
     },
     data: light({ dim: 20, bright: 10, alpha: 0.25 }),
     fuel: "Oil Flask",
@@ -55,7 +82,17 @@ export const BULLSEYE_INFOS = {
     effect: {
         id: "Bullseye",
         name: "Bullseye",
-        img: "icons/sundries/lights/lantern-bullseye-signal-copper.webp"
+        img: "icons/sundries/lights/lantern-bullseye-signal-copper.webp",
+        changes: [
+            { key: "ATL.light.dim", mode: 5, priority: null, value: "120" },
+            { key: "ATL.light.bright", mode: 5, priority: null, value: "60" },
+            { key: "ATL.light.animation.type", mode: 5, priority: null, value: "torch" },
+            { key: "ATL.light.animation.speed", mode: 5, priority: null, value: "1" },
+            { key: "ATL.light.animation.intensity", mode: 5, priority: null, value: "1" },
+            { key: "ATL.light.angle", mode: 5, priority: null, value: "60"},
+            { key: "ATL.light.alpha", mode: 5, priority: null, value: "0.3" },
+            { key: "ATL.light.color", mode: 5, priority: null, value: "#f98026" }
+        ]
     },
     data: light({ dim: 120, bright: 60, angle: 60, alpha: 0.3 }),
     fuel: "Oil Flask",
@@ -71,7 +108,16 @@ export const HOODED_LANTERN_CLOSED_INFOS = {
     effect: {
         id: "Hooded Lantern",
         name: "Hooded Lantern",
-        img: "icons/sundries/lights/lantern-iron-yellow.webp"
+        img: "icons/sundries/lights/lantern-iron-yellow.webp",
+        changes: [
+            { key: "ATL.light.dim", mode: 5, priority: null, value: "5" },
+            { key: "ATL.light.bright", mode: 5, priority: null, value: "0" },
+            { key: "ATL.light.animation.type", mode: 5, priority: null, value: "torch" },
+            { key: "ATL.light.animation.speed", mode: 5, priority: null, value: "1" },
+            { key: "ATL.light.animation.intensity", mode: 5, priority: null, value: "1" },
+            { key: "ATL.light.alpha", mode: 5, priority: null, value: "0.2" },
+            { key: "ATL.light.color", mode: 5, priority: null, value: "#f98026" }
+        ]
     },
     data: light({ dim: 5, bright: 0, alpha: 0.2 }),
     fuel: "Oil Flask",
@@ -87,7 +133,16 @@ export const HOODED_LANTERN_OPEN_INFOS = {
     effect: {
         id: "Lantern",
         name: "Lantern",
-        img: "icons/sundries/lights/lantern-iron-yellow.webp"
+        img: "icons/sundries/lights/lantern-iron-yellow.webp",
+        changes: [
+            { key: "ATL.light.dim", mode: 5, priority: null, value: "60" },
+            { key: "ATL.light.bright", mode: 5, priority: null, value: "30" },
+            { key: "ATL.light.animation.type", mode: 5, priority: null, value: "torch" },
+            { key: "ATL.light.animation.speed", mode: 5, priority: null, value: "1" },
+            { key: "ATL.light.animation.intensity", mode: 5, priority: null, value: "1" },
+            { key: "ATL.light.alpha", mode: 5, priority: null, value: "0.3" },
+            { key: "ATL.light.color", mode: 5, priority: null, value: "#f98026" }
+        ]
     },
     data: light({ dim: 60, bright: 30 }),
     fuel: "Oil Flask",
