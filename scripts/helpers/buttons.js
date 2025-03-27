@@ -4,7 +4,7 @@ import { useDdbItems, adminMode, checkIfLightItemIsClose } from "./checks.js"
 import { deleteLight, takeLightSource } from "../sockets.js"
 
 export function createLightButton() {
-    let button = document.createElement('div')
+    let button = document.createElement('button')
 
     button.classList.add('control-icon')
     button.classList.add('artwork-open')

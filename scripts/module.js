@@ -12,8 +12,8 @@ Hooks.on('renderTokenHUD', (hud, html) => {
     lightButton.on('click', () => {
         createMainDialog(hud.object)
     })
-
-    html.children('.left').append(lightButton)
+ 
+    html.children[0].append(lightButton[0])
     const artButton = createArtButton();
     const actor = hud.object.document.actor
 
@@ -24,7 +24,7 @@ Hooks.on('renderTokenHUD', (hud, html) => {
         createNewMediaDisplayApp(actor.img, actor, 'main');
     })
 
-    html.children('.left').append(artButton);
+    html.children[0].append(artButton[0]);
 })
 
 Hooks.on("init", () => {

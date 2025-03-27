@@ -3,7 +3,7 @@ import {getMacroKey, getPressedModifier} from './settings.js';
 import {shareImage} from "../sockets.js"
 
 const createArtButton = () => {
-  let button = document.createElement('div');
+  let button = document.createElement('button');
 
   button.classList.add('control-icon');
   button.classList.add('artwork-open');
