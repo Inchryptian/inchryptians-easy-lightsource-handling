@@ -15,7 +15,7 @@ export function createLightButton() {
 }
 
 export function createButton(label, callbackFunction, active = true, picture = null) {
-    const printLabel = (picture == null) ? label : `${label} <img src='${picture}' style="border:0;width:35px;height:35px;vertical-align:middle">`
+    const printLabel = label//(picture == null) ? label : `${label} <img src='${picture}' style="border:0;width:35px;height:35px;vertical-align:middle">`
     return {
         label: printLabel,
         action: label,
