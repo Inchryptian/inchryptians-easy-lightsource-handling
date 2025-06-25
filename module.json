@@ -40,8 +40,8 @@
   ],
   "socket": true,
   "url": "https://github.com/Inchryptian/inchryptians-easy-lightsource-handling/",
-  "manifest": "https://raw.githubusercontent.com/Inchryptian/inchryptians-easy-lightsource-handling/v12/module.json",
-  "download": "https://codeload.github.com/Inchryptian/inchryptians-easy-lightsource-handling/zip/v12",
+  "manifest": "https://raw.githubusercontent.com/Inchryptian/inchryptians-easy-lightsource-handling/v13/module.json",
+  "download": "https://codeload.github.com/Inchryptian/inchryptians-easy-lightsource-handling/zip/v13",
   "id": "inchryptians-easy-lightsource-handling",
   "relationships": {
     "requires": [
