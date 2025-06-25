@@ -1,10 +1,10 @@
 {
   "title": "Inchryptians easy lightsource handling",
   "description": "A simple module created to handle lightsources more easy",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "compatibility": {
-    "minimum": "12",
-    "verified": "12"
+    "minimum": "13",
+    "verified": "13"
   },
   "esmodules": [
     "scripts/lightSourceHandler.js",
