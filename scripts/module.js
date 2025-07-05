@@ -8,14 +8,19 @@ import { registerSettings } from './art_with_credits/settings.js';
 Hooks.on('renderTokenHUD', (hud, html) => {
     
     const lightButton = createLightButton();
+    const artButton = createArtButton();
+    const actor = hud.object.document.actor
+ 
+    const emptyButton = document.createElement('button')
+    emptyButton.style="padding: 0px; height: 0px; border: 0px;"
+
+    html.children[0].append(emptyButton)
+    html.children[0].append(lightButton[0])
+    html.children[0].append(artButton[0]);
 
     lightButton.on('click', () => {
         createMainDialog(hud.object)
     })
- 
-    html.children[0].append(lightButton[0])
-    const artButton = createArtButton();
-    const actor = hud.object.document.actor
 
     artButton.on('click', () => {
         createNewMediaDisplayApp(actor.img, actor, 'token');
@@ -24,7 +29,7 @@ Hooks.on('renderTokenHUD', (hud, html) => {
         createNewMediaDisplayApp(actor.img, actor, 'main');
     })
 
-    html.children[0].append(artButton[0]);
+    
 })
 
 Hooks.on("init", () => {
