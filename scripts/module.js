@@ -79,3 +79,24 @@ Hooks.on("refreshToken", async (token) => {
 
 Hooks.on("controlToken", (...args) => prepTokenKeybinding(...args));
 Hooks.on("hoverToken", (...args) => prepTokenKeybinding(...args));
+
+Hooks.on("dnd5e.renderChatMessage", chatMessage => {
+    if(!game.settings.get("inchryptians-easy-lightsource-handling", "diceSounds")) return
+    if((Date.now() - chatMessage.timestamp) > 100 ) return
+    for(let roll of chatMessage.rolls){
+        for(let die of roll.dice){
+            if(die.faces != 20) continue
+
+            if(die.results.find(result => result.result == 20)){ 
+                console.log("NAT 20!!!!")
+                foundry.audio.AudioHelper.play({src: "modules/inchryptians-easy-lightsource-handling/sounds/nat20.mp3", volume: 0.5}, []) 
+                return
+            }
+            if(die.results.find(result => result.result == 1)){ 
+                console.log("NAT 1††††")
+                foundry.audio.AudioHelper.play({src: "modules/inchryptians-easy-lightsource-handling/sounds/nat1.mp3", volume: 0.5}, []) 
+                return 
+            }
+        }
+    }
+})

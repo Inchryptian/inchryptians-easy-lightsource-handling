@@ -57,5 +57,14 @@ export const lightSourceHandlingSettings = [
             restricted: true,
             default: false,
             scope: "world"}
+    }, 
+    {
+        settingName: "diceSounds",
+        settingObject: { name: "Sounds for nat 1s and nat 20s",
+            config: true,
+            type: Boolean,
+            restricted: true,
+            default: true,
+            scope: "world"}
     }
 ]
