@@ -1,3 +1,5 @@
-2025/07/18-11:22:33.962 62ec Recovering log #316
-2025/07/18-11:22:33.965 62ec Delete type=0 #316
-2025/07/18-11:22:33.965 62ec Delete type=3 #315
+2025/07/18-18:20:31.214 4f10 Log #320: 0 ops saved to Table #321 OK
+2025/07/18-18:20:31.214 4f10 Archiving C:\FoundryVTT13\userData\Data\modules\inchryptians-easy-lightsource-handling\packs\light-source-actors/000320.log: OK
+2025/07/18-18:20:31.214 4f10 Table #306: 6 entries OK
+2025/07/18-18:20:31.215 4f10 Archiving C:\FoundryVTT13\userData\Data\modules\inchryptians-easy-lightsource-handling\packs\light-source-actors/MANIFEST-000319: OK
+2025/07/18-18:20:31.217 4f10 **** Repaired leveldb C:\FoundryVTT13\userData\Data\modules\inchryptians-easy-lightsource-handling\packs\light-source-actors; recovered 1 files; 15643 bytes. Some data may have been lost. ****

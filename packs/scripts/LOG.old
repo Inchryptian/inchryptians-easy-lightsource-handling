@@ -1,3 +1,5 @@
-2025/07/18-11:22:33.970 db0 Recovering log #317
-2025/07/18-11:22:33.974 db0 Delete type=0 #317
-2025/07/18-11:22:33.974 db0 Delete type=3 #316
+2025/07/18-18:20:31.226 4f10 Log #321: 0 ops saved to Table #322 OK
+2025/07/18-18:20:31.226 4f10 Archiving C:\FoundryVTT13\userData\Data\modules\inchryptians-easy-lightsource-handling\packs\scripts/000321.log: OK
+2025/07/18-18:20:31.226 4f10 Table #307: 2 entries OK
+2025/07/18-18:20:31.227 4f10 Archiving C:\FoundryVTT13\userData\Data\modules\inchryptians-easy-lightsource-handling\packs\scripts/MANIFEST-000320: OK
+2025/07/18-18:20:31.229 4f10 **** Repaired leveldb C:\FoundryVTT13\userData\Data\modules\inchryptians-easy-lightsource-handling\packs\scripts; recovered 1 files; 2451 bytes. Some data may have been lost. ****
