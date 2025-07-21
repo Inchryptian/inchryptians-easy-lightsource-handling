@@ -80,9 +80,7 @@ Hooks.on("refreshToken", async (token) => {
 Hooks.on("controlToken", (...args) => prepTokenKeybinding(...args));
 Hooks.on("hoverToken", (...args) => prepTokenKeybinding(...args));
 
-
 Hooks.on("updateChatMessage", (chatMessage, a, b) => {
-    console.log(chatMessage)
     if(!game.user.isGM) return 
     if(!game.settings.get("inchryptians-easy-lightsource-handling", "diceSounds")) return 
 
@@ -92,12 +90,18 @@ Hooks.on("updateChatMessage", (chatMessage, a, b) => {
 
             if(die.results.find(result => result.result == 20)){ 
                 console.log("NAT 20!!!!")
-                setTimeout(() => {foundry.audio.AudioHelper.play({src: "modules/inchryptians-easy-lightsource-handling/sounds/nat20.mp3", volume: 0.5}, []) }, 1000)
+                let possibleSounds = game.settings.get("inchryptians-easy-lightsource-handling", "diceSoundFilesGood").split(",")
+                let randomNumber = parseInt((Math.random()*100)) % possibleSounds.length
+                let sound = possibleSounds[randomNumber]
+                setTimeout(() => {foundry.audio.AudioHelper.play({src: sound, volume: 0.5}, []) }, 1000)
                 return
             }
             if(die.results.find(result => result.result == 1)){ 
                 console.log("NAT 1††††")
-                setTimeout(() => {foundry.audio.AudioHelper.play({src: "modules/inchryptians-easy-lightsource-handling/sounds/nat1.mp3", volume: 0.5}, []) }, 1000)
+                let possibleSounds = game.settings.get("inchryptians-easy-lightsource-handling", "diceSoundFilesBad").split(",")
+                let randomNumber = parseInt((Math.random()*100)) % possibleSounds.length
+                let sound = possibleSounds[randomNumber]
+                setTimeout(() => {foundry.audio.AudioHelper.play({src: sound, volume: 0.5}, []) }, 1000)
                 return 
             }
         }

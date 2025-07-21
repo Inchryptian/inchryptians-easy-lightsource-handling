@@ -64,7 +64,25 @@ export const lightSourceHandlingSettings = [
             config: true,
             type: Boolean,
             restricted: true,
-            default: true,
+            default: false,
+            scope: "world"}
+    },
+    {
+        settingName: "diceSoundFilesGood",
+        settingObject: { name: "Sounds nat 20s",
+            config: true,
+            default: "",
+            type: String,
+            restricted: true,
+            scope: "world"}
+    },
+    {
+        settingName: "diceSoundFilesBad",
+        settingObject: { name: "Sounds nat 1s",
+            config: true,
+            default: "",
+            type: String,
+            restricted: true,
             scope: "world"}
     }
 ]
