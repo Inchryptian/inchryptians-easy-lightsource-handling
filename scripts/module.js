@@ -4,6 +4,7 @@ import { LIGHT_INFO_ORDER } from "./constants.js"
 import { createMainDialog } from "./helpers/dialogs.js"
 import { createArtButton, createNewMediaDisplayApp, prepTokenKeybinding} from "./art_with_credits/lib.js"
 import { registerSettings } from './art_with_credits/settings.js';
+import { changeDarkvision } from './sockets.js'
 
 Hooks.on('renderTokenHUD', (hud, html) => {
     
@@ -35,6 +36,7 @@ Hooks.on('renderTokenHUD', (hud, html) => {
 Hooks.on("init", () => {
     registerSettings()
     window.createMainDialogForInchryptianModule = createMainDialog
+    window.changeDarkvisionModeForInchryptianModule = changeDarkvision
     for (let setting of lightSourceHandlingSettings) {
         game.settings.register("inchryptians-easy-lightsource-handling", setting.settingName, setting.settingObject)
     }
@@ -79,31 +81,3 @@ Hooks.on("refreshToken", async (token) => {
 
 Hooks.on("controlToken", (...args) => prepTokenKeybinding(...args));
 Hooks.on("hoverToken", (...args) => prepTokenKeybinding(...args));
-
-Hooks.on("updateChatMessage", (chatMessage, a, b) => {
-    if(!game.user.isGM) return 
-    if(!game.settings.get("inchryptians-easy-lightsource-handling", "diceSounds")) return 
-
-    for(let roll of chatMessage.rolls){
-        for(let die of roll.dice){
-            if(die.faces != 20) continue
-
-            if(die.results.find(result => result.result == 20)){ 
-                console.log("NAT 20!!!!")
-                let possibleSounds = game.settings.get("inchryptians-easy-lightsource-handling", "diceSoundFilesGood").split(",")
-                let randomNumber = parseInt((Math.random()*100)) % possibleSounds.length
-                let sound = possibleSounds[randomNumber]
-                setTimeout(() => {foundry.audio.AudioHelper.play({src: sound, volume: 0.5}, []) }, 1000)
-                return
-            }
-            if(die.results.find(result => result.result == 1)){ 
-                console.log("NAT 1††††")
-                let possibleSounds = game.settings.get("inchryptians-easy-lightsource-handling", "diceSoundFilesBad").split(",")
-                let randomNumber = parseInt((Math.random()*100)) % possibleSounds.length
-                let sound = possibleSounds[randomNumber]
-                setTimeout(() => {foundry.audio.AudioHelper.play({src: sound, volume: 0.5}, []) }, 1000)
-                return 
-            }
-        }
-    }
-})

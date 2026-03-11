@@ -10,7 +10,12 @@ Hooks.once("setup", () =>{
     socket.register("offerLightSourceForPlayer", offerLightSourceForPlayer)
     socket.register("removeEffectForUser", removeEffectForUser)
     socket.register("shareImages", receiveSharedImages)
+    socket.register("toggleDarkVision", toggleDarkVision)
 })
+
+export function changeDarkvision(){
+    socket.executeForEveryone("toggleDarkVision", CONFIG.Canvas.visionModes.darkvision.vision.defaults.brightness)
+}
 
 export function askForLight(request){
     socket.executeForEveryone("askOtherPlayerForLight", request)
@@ -23,13 +28,11 @@ export function deleteLight(closeLightItem){
 export async function offerLightSource(lightSource) {
     //For multiple targets [...new Set(...game.user.targets.map(i => Object.keys(i.actor.ownership)))].filter(i => i !== 'default')
     const users = Object.keys(game.user.targets.first().actor.ownership).filter(i => i !== 'default')
-    console.log("TEST")
     socket.executeForUsers("offerLightSourceForPlayer", users, game.user.targets.first().id, lightSource)
 }
 
 export function takeLightSource(lightSourceActor, lightInfos) {
     const users = Object.keys(lightSourceActor.object.actor.ownership).filter(i => i !== 'default')
-    console.log(lightSourceActor)
     socket.executeForUsers("removeEffectForUser", users, lightSourceActor.object.id, lightInfos)
 }
 
@@ -41,6 +44,20 @@ export async function shareImage(imgPath, text, actorId, type){
       type: type
     });
   };
+
+function toggleDarkVision(current_GM_Value){
+    if(current_GM_Value == 0.1){
+        CONFIG.Canvas.visionModes.darkvision.vision.defaults.brightness = -1
+        canvas.tokens.ownedTokens.forEach(element => {
+            element.document.update({x: element.document.x + 1 }) 
+        })
+    } else { 
+        CONFIG.Canvas.visionModes.darkvision.vision.defaults.brightness = 0.1
+        canvas.tokens.ownedTokens.forEach(element => {
+            element.document.update({x: element.document.x - 1  }) 
+        })
+    }
+}
 
 function askOtherPlayerForLight(request){
     if(!game.settings.get("inchryptians-easy-lightsource-handling", "lightRequestsForAdmin") && game.user.isGM) return
