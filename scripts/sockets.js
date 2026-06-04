@@ -11,6 +11,7 @@ Hooks.once("setup", () =>{
     socket.register("removeEffectForUser", removeEffectForUser)
     socket.register("shareImages", receiveSharedImages)
     socket.register("toggleDarkVision", toggleDarkVision)
+    socket.register("changeTokenSpeed", changeTokenSpeed)
 })
 
 export function changeDarkvision(){
@@ -23,6 +24,10 @@ export function askForLight(request){
 
 export function deleteLight(closeLightItem){
     socket.executeAsGM("deleteLightGM", closeLightItem.object.id)
+}
+
+export function changeTokenSpeedForPathing(duration, notifications){
+    socket.executeForEveryone("changeTokenSpeed", duration, notifications)
 }
 
 export async function offerLightSource(lightSource) {
@@ -101,3 +106,37 @@ function receiveSharedImages(receivedObject) {
     if(receivedObject.handlerName != null) return
     createReceivedMediaDisplayApp(receivedObject);
   };
+
+function isPatrolToken(token) {
+    return token.document.getFlag("patrol", "makePatroller") === true;
+}
+
+function changeTokenSpeed(duration, notifications){
+    const TokenClass = foundry.canvas.placeables.Token;
+
+    if (globalThis._slowPatrolAnimatePatch) {
+        TokenClass.prototype.animate = globalThis._slowPatrolAnimatePatch.original;
+        delete globalThis._slowPatrolAnimatePatch;
+        if(notifications) {
+            ui.notifications.info("Patrol Slow Animation: off");
+        }
+    } else {
+        globalThis._slowPatrolAnimatePatch = {
+            original: TokenClass.prototype.animate
+        };
+
+        TokenClass.prototype.animate = function(...args) {
+            const isActiveScene = this.document?.parent?.id === canvas.scene.id;
+
+            if (isActiveScene && isPatrolToken(this)) {
+            args[1] ??= {};
+            args[1].duration = duration;
+            }
+
+            return globalThis._slowPatrolAnimatePatch.original.apply(this, args);
+        };
+        if(notifications){
+            ui.notifications.info(`Patrol Slow Animation: ON (${duration}ms)`);
+        }
+    }
+}

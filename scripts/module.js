@@ -4,7 +4,7 @@ import { LIGHT_INFO_ORDER } from "./constants.js"
 import { createMainDialog } from "./helpers/dialogs.js"
 import { createArtButton, createNewMediaDisplayApp, prepTokenKeybinding} from "./art_with_credits/lib.js"
 import { registerSettings } from './art_with_credits/settings.js';
-import { changeDarkvision } from './sockets.js'
+import { changeDarkvision, changeTokenSpeedForPathing } from './sockets.js'
 
 Hooks.on('renderTokenHUD', (hud, html) => {
     
@@ -37,6 +37,7 @@ Hooks.on("init", () => {
     registerSettings()
     window.createMainDialogForInchryptianModule = createMainDialog
     window.changeDarkvisionModeForInchryptianModule = changeDarkvision
+    window.changeTokenSpeedForPathingForInchryptianModule = changeTokenSpeedForPathing
     for (let setting of lightSourceHandlingSettings) {
         game.settings.register("inchryptians-easy-lightsource-handling", setting.settingName, setting.settingObject)
     }
