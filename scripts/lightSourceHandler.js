@@ -6,6 +6,8 @@ async function createDroppedLightItem(token, actor, lightInfos) {
     let protoToken = foundry.utils.duplicate(actor.prototypeToken)
     protoToken.x = token.center.x;
     protoToken.y = token.center.y;
+    protoToken.level = canvas.level.id
+    protoToken.actor = actor
     await canvas.scene.createEmbeddedDocuments("Token", [protoToken])
     if (adminMode()) return
     if (lightInfos.fuel != undefined) {
