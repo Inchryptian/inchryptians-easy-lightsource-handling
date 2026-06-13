@@ -7,6 +7,7 @@ async function createDroppedLightItem(token, actor, lightInfos) {
     protoToken.x = token.center.x;
     protoToken.y = token.center.y;
     protoToken.level = canvas.level.id
+    protoToken.elevation = token.document.elevation
     protoToken.actor = actor
     await canvas.scene.createEmbeddedDocuments("Token", [protoToken])
     if (adminMode()) return
